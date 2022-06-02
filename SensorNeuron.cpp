@@ -1,4 +1,4 @@
-#include <SensorNeuron.h>
+#include "SensorNeuron.h"
 
 SensorNeuron::SensorNeuron(int address, float (*func)(int))
 {
