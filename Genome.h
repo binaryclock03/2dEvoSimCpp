@@ -26,6 +26,8 @@ public:
     Genome(int numberOfGenes,int maxInIndex, int maxOutIndex, int maxInterIndex);
     void mutateGene(int indexOfGene);
     void mutate(float mutationRate);
+    int getNumberOfGenes() {return this->numberOfGenes;};
+    string toString();
     Gene genes[64];
 };
 

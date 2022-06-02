@@ -16,19 +16,6 @@ Gene::Gene() {
 
 string Gene::toString() 
 {
-    // char inAdrStr[2];
-    // sprintf(inAdrStr, "%0*x" ,2, this->inAdr);
-
-    // char outAdrStr[2];
-    // sprintf(outAdrStr,"%0*x" ,2, this->outAdr);
-
-    // char strengthStr[4];
-    // sprintf(strengthStr,"%0*x" ,2, this->strength);
-    
-    // char geneAr[8] = {inAdrStr[0],inAdrStr[1],outAdrStr[0],outAdrStr[1],strengthStr[0],strengthStr[1],strengthStr[2],strengthStr[3]};
-    
-    // string gene(geneAr);
-
     string inAdr = intToHex(this->inAdr,2);
     string outAdr = intToHex(this->outAdr,2);
     string strength = intToHex(this->strength,4);
@@ -120,5 +107,16 @@ void Genome::mutate(float mutationRate) {
             this->mutateGene(i);
         }
     }
+}
+
+string Genome::toString() {
+    string genomeStr = "";
+    for (int i = 0; i < this->numberOfGenes; i++) {
+        genomeStr = genomeStr + this->genes[i].toString();
+        if (i < this->numberOfGenes - 1 ) {
+            genomeStr = genomeStr + " ";
+        }
+    }
+    return genomeStr;
 }
 
