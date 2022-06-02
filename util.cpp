@@ -1,6 +1,7 @@
 #include <random>
 #include <iomanip>
 #include <string>
+#include "util.h"
 
 using namespace std;
 
@@ -32,4 +33,12 @@ string intToHex(int toHex,int size) {
     std::stringstream stream;
     stream << std::setfill('0') << std::setw(size) << std::hex << toHex;
     return stream.str();
+}
+
+int hexToInt(string str) {
+    int output;
+    std::stringstream stream;
+    stream << std::hex << str;
+    stream >> output;
+    return output;
 }
