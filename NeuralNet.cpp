@@ -4,6 +4,8 @@
 #include "ActionNeuron.h"
 #include <unordered_set>
 
+NeuralNet::NeuralNet() {}
+
 void NeuralNet::buildNet(Genome genome)
 {
     unordered_set<int> usedAdr;

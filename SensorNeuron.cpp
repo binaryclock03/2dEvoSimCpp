@@ -1,5 +1,10 @@
 #include "SensorNeuron.h"
 
+SensorNeuron::SensorNeuron(int address)
+{
+    this->address = address;
+}
+
 SensorNeuron::SensorNeuron(int address, float (*func)(int))
 {
     this->address = address;

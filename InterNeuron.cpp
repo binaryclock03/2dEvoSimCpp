@@ -2,6 +2,11 @@
 #include <cmath>
 #include <numeric>
 
+InterNeuron::InterNeuron(int address)
+{
+    this->address = address;
+}
+
 void InterNeuron::activate(int action)
 {
     switch(action) {

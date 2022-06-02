@@ -3,6 +3,11 @@
 #include <cmath>
 #include <numeric>
 
+ActionNeuron::ActionNeuron(int address)
+{
+    this->address = address;
+}
+
 ActionNeuron::ActionNeuron(int address, void (*funcPos)(int), void (*funcNeg)(int))
 {
     this->address = address;
