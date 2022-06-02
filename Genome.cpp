@@ -1,12 +1,8 @@
 #include <string>
 #include "Genome.h"
-#include <random>
-#include "util.cpp"
-
+#include "util.h"
 
 using namespace std;
-
-
 
 Gene::Gene(int inAdr, int outAdr, int strength) {
     this->inAdr = inAdr;
@@ -14,20 +10,30 @@ Gene::Gene(int inAdr, int outAdr, int strength) {
     this->strength = strength;
 }
 
+Gene::Gene() {
+
+}
+
 string Gene::toString() 
 {
-    char inAdrStr[2];
-    sprintf(inAdrStr, "%0*x" ,2, this->inAdr);
+    // char inAdrStr[2];
+    // sprintf(inAdrStr, "%0*x" ,2, this->inAdr);
 
-    char outAdrStr[2];
-    sprintf(outAdrStr,"%0*x" ,2, this->outAdr);
+    // char outAdrStr[2];
+    // sprintf(outAdrStr,"%0*x" ,2, this->outAdr);
 
-    char strengthStr[4];
-        sprintf(strengthStr,"%0*x" ,2, this->strength);
+    // char strengthStr[4];
+    // sprintf(strengthStr,"%0*x" ,2, this->strength);
     
-    char geneAr[8] = {inAdrStr[0],inAdrStr[1],outAdrStr[0],outAdrStr[1],strengthStr[0],strengthStr[1],strengthStr[2],strengthStr[3]};
+    // char geneAr[8] = {inAdrStr[0],inAdrStr[1],outAdrStr[0],outAdrStr[1],strengthStr[0],strengthStr[1],strengthStr[2],strengthStr[3]};
     
-    string gene(geneAr);
+    // string gene(geneAr);
+
+    string inAdr = intToHex(this->inAdr,2);
+    string outAdr = intToHex(this->outAdr,2);
+    string strength = intToHex(this->strength,4);
+    
+    string gene = inAdr + outAdr + strength;
 
     return gene;
 }
@@ -53,15 +59,15 @@ Genome::Genome(int numberOfGenes,int maxInIndex, int maxOutIndex, int maxInterIn
             possibleOutAdrs[i+maxOutIndex] = i + 128;
 
         }
-        if (i < maxOutIndex && i < maxInIndex) {
+        if (i > maxOutIndex && i > maxInIndex) {
             break;
         }
     } 
 
     for(int i = 0; i < numberOfGenes; i++) 
     {
-        int inAdr = possibleInAdrs[randInt(0,maxInIndex)];
-        int outAdr = possibleOutAdrs[randInt(0,maxOutIndex)];
+        int inAdr = possibleInAdrs[randInt(0,maxInIndex+maxInterIndex)];
+        int outAdr = possibleOutAdrs[randInt(0,maxOutIndex+maxInterIndex)];
         int strength = randInt(0,65536);        
         Gene gene = Gene(inAdr,outAdr,strength);
         this->genes[i] = gene;
@@ -86,7 +92,7 @@ void Genome::mutateGene(int indexOfGene) {
             possibleOutAdrs[i] = i;
             possibleOutAdrs[i+this->maxOutIndex] = i + 128;
         }
-        if (i < this->maxOutIndex && i < this->maxInIndex) {
+        if (i > this->maxOutIndex && i > this->maxInIndex) {
             break;
         }
     }
@@ -94,11 +100,11 @@ void Genome::mutateGene(int indexOfGene) {
     int toChange = randInt(0,2);
 
     if (toChange == 0) {
-        int newInAdr = possibleInAdrs[randInt(0,this->maxInIndex)];
+        int newInAdr = possibleInAdrs[randInt(0,this->maxInIndex+this->maxInterIndex)];
         this->genes[indexOfGene].inAdr = newInAdr;
     } else if (toChange == 1)
     {
-        int newOutAdr = possibleOutAdrs[randInt(0,this->maxOutIndex)];
+        int newOutAdr = possibleOutAdrs[randInt(0,this->maxOutIndex+this->maxInterIndex)];
         this->genes[indexOfGene].outAdr = newOutAdr;
     } else {
         int newStrength = randInt(0,65536);

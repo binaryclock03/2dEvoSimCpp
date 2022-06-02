@@ -1,4 +1,8 @@
 #include <random>
+#include <iomanip>
+#include <string>
+
+using namespace std;
 
 int randInt( int min, int max)
  {
@@ -22,4 +26,10 @@ float random()
     std::mt19937                        gen(rand_dev());
     std::uniform_real_distribution<>    distr(0,1);
     return distr(gen);
+}
+
+string intToHex(int toHex,int size) {
+    std::stringstream stream;
+    stream << std::setfill('0') << std::setw(size) << std::hex << toHex;
+    return stream.str();
 }

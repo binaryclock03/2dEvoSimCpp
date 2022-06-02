@@ -9,6 +9,7 @@ struct Gene
     int inAdr;
     int outAdr;
     int strength;
+    Gene();
     Gene(int inAdr, int outAdr, int strength);
     string toString();
 };
