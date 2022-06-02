@@ -1,6 +1,6 @@
 // Neuron.h
-#include <forward_list>
 #pragma once
+#include <forward_list>
 
 using namespace std;
 

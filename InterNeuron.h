@@ -1,6 +1,6 @@
 // InterNeuron.h
-#include "Neuron.h"
 #pragma once
+#include "Neuron.h"
 
 class InterNeuron: public Neuron
 {
