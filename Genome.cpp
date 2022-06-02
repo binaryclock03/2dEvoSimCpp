@@ -25,6 +25,10 @@ string Gene::toString()
     return gene;
 }
 
+Genome::Genome() {
+
+}
+
 
 Genome::Genome(int numberOfGenes,int maxInIndex, int maxOutIndex, int maxInterIndex) 
 {
@@ -60,6 +64,19 @@ Genome::Genome(int numberOfGenes,int maxInIndex, int maxOutIndex, int maxInterIn
         this->genes[i] = gene;
     }
 
+}
+
+Genome::Genome(Gene genes[64],int numberOfGenes,int maxInIndex, int maxOutIndex, int maxInterIndex) {
+    this->numberOfGenes = numberOfGenes;
+    this->maxInIndex = maxInIndex;
+    this->maxOutIndex = maxOutIndex;
+    this->maxInterIndex = maxInterIndex;
+
+    for (int i = 0; i < numberOfGenes; i++) {
+        this->genes[i] = genes[i];
+    }
+
+    //this->genes = genes;
 }
 
 void Genome::mutateGene(int indexOfGene) {
@@ -120,3 +137,6 @@ string Genome::toString() {
     return genomeStr;
 }
 
+Genome Genome::copy() {
+    return Genome(this->genes,this->numberOfGenes,this->maxInIndex,this->maxOutIndex,this->maxInterIndex);
+}
