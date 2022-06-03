@@ -1,16 +1,22 @@
 #include <iostream>
 #include "netObjects/NeuralNet.h"
-#include "Genome.h"
+#include "Population.h"
+#include <chrono>
+#include <ctime> 
 
 using namespace std;
 
 int main()
 {
-    Genome genome = Genome(4,4,4,4);
-    NeuralNet brain = NeuralNet();
-    brain.buildNet(genome);
-    brain.checkPaths();
+    auto start = std::chrono::system_clock::now();
+    //Put code under this
 
-    std::cout << brain.getGenes().front().toString() << std::endl;
+    //Put code above this
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end-start;
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+    std::cout << "finished computation at " << std::ctime(&end_time)
+              << "elapsed time: " << elapsed_seconds.count() << "s"
+              << std::endl;
     std::cin.get();
 }
