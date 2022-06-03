@@ -42,7 +42,7 @@ forward_list<Gene> NeuralNet::getGenes()
     return this->genes;
 }
 
-unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <int> validatedNodesInPath, unordered_set <int> validatedNodes) {
+unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <int> validatedNodesInPath, unordered_set<int>& validatedNodes) {
     Neuron& neuron = this->neurons[nodeAdr];
 
     if (depth > 1000) {
@@ -104,11 +104,14 @@ unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <i
 unordered_set<int> NeuralNet::checkPaths() {
     unordered_set <int> activeAdrs;
     unordered_set <int> emptySet;
+    unordered_set <int> checkedInAdrs;
+
     emptySet.clear();
 
       for (Gene gene : this->genes) 
     {
-      if (gene.inAdr < 128) {
+      if (gene.inAdr < 128 && checkedInAdrs.count(gene.inAdr) < 1 ) {
+          checkedInAdrs.insert(gene.inAdr);
           activeAdrs.merge(this->checkPath(gene.inAdr,0,emptySet,activeAdrs));
       }  
     }

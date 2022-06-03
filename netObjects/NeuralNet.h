@@ -23,5 +23,5 @@ public:
 
     forward_list<Gene> getGenes();
 private:
-    unordered_set<int> checkPath(int nodeAdr, int depth, unordered_set<int> validatedNodesInPath, unordered_set<int> validatedNodes);
+    unordered_set<int> checkPath(int nodeAdr, int depth, unordered_set<int> validatedNodesInPath, unordered_set<int>& validatedNodes);
 };
