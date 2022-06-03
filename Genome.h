@@ -6,11 +6,11 @@ using namespace std;
 
 struct Gene
 {
-    int inAdr;
-    int outAdr;
-    int strength;
+    char inAdr;
+    char outAdr;
+    short strength;
     Gene();
-    Gene(int inAdr, int outAdr, int strength);
+    Gene(char inAdr, char outAdr, short strength);
     string toString();
 };
 
