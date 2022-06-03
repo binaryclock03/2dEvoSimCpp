@@ -1,5 +1,5 @@
 #include "ActionNeuron.h"
-#include "util.h"
+#include "../util.h"
 #include <cmath>
 #include <numeric>
 
