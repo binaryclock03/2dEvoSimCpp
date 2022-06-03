@@ -12,7 +12,7 @@ void NeuralNet::buildNet(Genome genome)
 
     for (int i = 0; i < genome.getNumberOfGenes(); i++)
     {
-        Gene gene = genome.genes[i];
+        Gene gene = genome.getGene(i);
         this->genes.push_front(gene);
         usedAdr.insert(gene.inAdr);
         usedAdr.insert(gene.outAdr);

@@ -77,6 +77,10 @@ Genome::Genome(Gene genes[64],int numberOfGenes,int maxInIndex, int maxOutIndex,
     }
 }
 
+Gene Genome::getGene(int index) {
+    return this->genes[index];
+}
+
 void Genome::mutateGene(int indexOfGene) {
     if (indexOfGene < 0) {
         indexOfGene = randInt(0,this->numberOfGenes);

@@ -43,6 +43,11 @@ void Population::generateGenomes(int numberOfGenomes,int genesPerGenome,int maxI
 
 }
 
+Genome Population::getGenome(int index) 
+{
+    return this->genomes[index];
+}
+
 void Population::saveGeneration() {
 
     string filePath = "Populations//" + this->name + ".csv";
@@ -62,8 +67,6 @@ void Population::saveGeneration() {
         file << generationStr << "\n";
         file.close();
     }
-
-
 }
 
 void Population::loadGeneration(int generation) {

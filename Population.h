@@ -10,6 +10,7 @@ class Population {
     Population();
     Population(string name);
     void generateGenomes(int numberOfGenomes,int genesPerGenome,int maxInIndex,int maxOutIndex,int maxInterIndex);
+    Genome getGenome(int index);
     void saveGeneration();
     void loadGeneration(int generation);
     int getGeneration() {return this->generation;};
