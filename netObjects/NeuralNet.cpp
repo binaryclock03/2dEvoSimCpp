@@ -43,7 +43,12 @@ forward_list<Gene> NeuralNet::getGenes()
 }
 
 unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <int> validatedNodesInPath, unordered_set <int> validatedNodes) {
-    Neuron neuron = this->neurons[nodeAdr];
+    Neuron& neuron = this->neurons[nodeAdr];
+
+    if (depth > 1000) {
+        unordered_set<int> emptySet;
+        return emptySet;
+    }
 
     //Checks neuron depth and assigns it a new depth if needed
     if (neuron.getDepth() == 0) {
@@ -53,7 +58,6 @@ unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <i
     }
 
     bool deadEnd = true; //assume node is a dead end
-
     //Loop through genes
     for (Gene gene : this->genes) {
         unordered_set<int> nodesBelow;
@@ -71,7 +75,7 @@ unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <i
             } else if (validatedNodes.count(gene.outAdr) < 0)
             {
                 nodesBelow.insert(gene.outAdr);
-            } else if ((gene.inAdr != gene.outAdr) && //Checks if the next inter neuron is not its self and lower 
+            } else if ((gene.inAdr != gene.outAdr) && //Checks if the next inter neuron is not its self or lower 
             (this->neurons[gene.outAdr].getDepth() == 0 || this->neurons[gene.outAdr].getDepth() > neuron.getDepth()))
             {
                 nodesBelow.merge(this->checkPath(gene.outAdr,depth+1,validatedNodesInPath,validatedNodes)); //Check path of the next node

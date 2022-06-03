@@ -5,6 +5,7 @@
 InterNeuron::InterNeuron(int address)
 {
     this->address = address;
+    this->depth = 0;
 }
 
 void InterNeuron::activate(int action)

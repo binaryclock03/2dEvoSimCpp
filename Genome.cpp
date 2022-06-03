@@ -75,8 +75,6 @@ Genome::Genome(Gene genes[64],int numberOfGenes,int maxInIndex, int maxOutIndex,
     for (int i = 0; i < numberOfGenes; i++) {
         this->genes[i] = genes[i];
     }
-
-    //this->genes = genes;
 }
 
 void Genome::mutateGene(int indexOfGene) {

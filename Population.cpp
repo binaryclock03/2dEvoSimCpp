@@ -83,7 +83,7 @@ void Population::loadGeneration(int generation) {
         
             vector<Genome> genomes;
             for (int i = 0; i < this->numberOfGenomes; i++) {
-                Gene genes[this->genesPerGenome];
+                Gene genes[64];
                 for (int ii = 0; ii < 64; ii++) {
                     int test = 0;
                     Gene gene = Gene(0,0,0);
