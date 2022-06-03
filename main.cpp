@@ -1,5 +1,5 @@
 #include <iostream>
-#include "NeuralNet.h"
+#include "netObjects/NeuralNet.h"
 #include "Genome.h"
 
 using namespace std;

@@ -1,7 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include "Neuron.h"
-#include "Genome.h"
+#include "../Genome.h"
 
 using namespace std;
 
