@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <chrono>
+#include <iostream>
 #include "util.h"
 #include "XoshiroCpp.hpp"
 
@@ -30,7 +31,6 @@ float randFloat( float min, float max)
     return distr(rng);
 }
 
-
 float random()
  {
     XoshiroCpp::Xoshiro256StarStar rng(RNG_SEED);
@@ -51,4 +51,23 @@ int hexToInt(string str) {
     stream << std::hex << str;
     stream >> output;
     return output;
+}
+
+
+Timer::Timer()
+{
+    this->start = std::chrono::high_resolution_clock::now();
+}
+
+Timer::Timer(string name)
+{
+    this->name = name;
+    this->start = std::chrono::high_resolution_clock::now();
+}
+
+Timer::~Timer()
+{
+    this->end = std::chrono::high_resolution_clock::now();
+    this->duration = this->end - this->start;
+    std::cout << name <<" took: " << duration.count() << "s" << std::endl;
 }
