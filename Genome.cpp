@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Gene::Gene(char inAdr, char outAdr, short strength) {
+Gene::Gene(unsigned char inAdr,unsigned char outAdr, unsigned short strength) {
     this->inAdr = inAdr;
     this->outAdr = outAdr;
     this->strength = strength;
@@ -57,9 +57,9 @@ Genome::Genome(int numberOfGenes,int maxInIndex, int maxOutIndex, int maxInterIn
 
     for(int i = 0; i < numberOfGenes; i++) 
     {
-        char inAdr = possibleInAdrs[randInt(0,maxInIndex+maxInterIndex)];
-        char outAdr = possibleOutAdrs[randInt(0,maxOutIndex+maxInterIndex)];
-        short strength = randInt(0,65536);        
+        unsigned char inAdr = possibleInAdrs[randInt(0,maxInIndex+maxInterIndex)];
+        unsigned char outAdr = possibleOutAdrs[randInt(0,maxOutIndex+maxInterIndex)];
+        unsigned short strength = randInt(0,65536);        
         Gene gene = Gene(inAdr,outAdr,strength);
         this->genes[i] = gene;
     }
@@ -106,14 +106,14 @@ void Genome::mutateGene(int indexOfGene) {
     int toChange = randInt(0,2);
 
     if (toChange == 0) {
-        char newInAdr = possibleInAdrs[randInt(0,this->maxInIndex+this->maxInterIndex)];
+        unsigned char newInAdr = possibleInAdrs[randInt(0,this->maxInIndex+this->maxInterIndex)];
         this->genes[indexOfGene].inAdr = newInAdr;
     } else if (toChange == 1)
     {
-        char newOutAdr = possibleOutAdrs[randInt(0,this->maxOutIndex+this->maxInterIndex)];
+        unsigned char newOutAdr = possibleOutAdrs[randInt(0,this->maxOutIndex+this->maxInterIndex)];
         this->genes[indexOfGene].outAdr = newOutAdr;
     } else {
-        short newStrength = randInt(0,65536);
+        unsigned short newStrength = randInt(0,65536);
         this->genes[indexOfGene].strength = newStrength;
     }
 
