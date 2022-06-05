@@ -2,6 +2,7 @@
 #include <string>
 #include <chrono>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -23,3 +24,7 @@ struct Timer
     Timer(string name);
     ~Timer();
 };
+
+float clamp(float num, float minValue, float maxValue);
+
+float scale(float num, float inMin, float inMax, float outMin, float outMax);

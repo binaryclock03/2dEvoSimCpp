@@ -71,3 +71,11 @@ Timer::~Timer()
     this->duration = this->end - this->start;
     std::cout << name <<" took: " << duration.count() << "s" << std::endl;
 }
+
+float clamp(float num, float minValue, float maxValue) {
+    return std::max(std::min(num, maxValue), minValue);
+}
+
+float scale(float x, float inMin, float inMax, float outMin, float outMax) {
+    return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
