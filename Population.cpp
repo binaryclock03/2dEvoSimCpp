@@ -52,7 +52,8 @@ void Population::saveGeneration() {
 
     string filePath = "Populations//" + this->name + ".csv";
 
-    std::fstream file(filePath, file.app | file.out);
+    std::fstream file;
+    file.open(filePath, file.app | file.out);
 
     if (!file.is_open()) {
         std::cout << "Failed to open file: " << filePath << std::endl;
@@ -73,7 +74,8 @@ void Population::loadGeneration(int generation) {
 
     string filePath = "Populations//" + this->name + ".csv";
 
-    std::fstream file(filePath, file.ate | file.in);
+    std::fstream file; 
+    file.open(filePath, file.ate | file.in);
     if (!file.is_open()) {
         std::cout << "Failed to open file: " << filePath << std::endl;
     } else {
