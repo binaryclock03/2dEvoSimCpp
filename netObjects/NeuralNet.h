@@ -10,8 +10,9 @@ using namespace std;
 class NeuralNet
 {
 protected:
-    unordered_map<int, Neuron> neurons;
+    vector<Neuron> neurons;
     forward_list<Gene> genes;
+    unordered_map<int, int> neuronIdIndexMap;
     int maxDepth;
 public:
     NeuralNet();

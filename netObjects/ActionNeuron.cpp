@@ -11,6 +11,8 @@ ActionNeuron::ActionNeuron(int address)
 
 ActionNeuron::ActionNeuron(int address, void (*funcPos)(int), void (*funcNeg)(int))
 {
+    this->actionFunctionNeg = funcNeg;
+    this->actionFunctionPos = funcPos;
     this->address = address;
     this->depth = 0;
 };

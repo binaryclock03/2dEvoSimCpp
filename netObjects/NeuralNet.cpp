@@ -2,6 +2,7 @@
 #include "SensorNeuron.h"
 #include "InterNeuron.h"
 #include "ActionNeuron.h"
+#include "../util.h"
 #include <unordered_set>
 #include <set>
 #include <vector>
@@ -20,24 +21,64 @@ void NeuralNet::buildNet(Genome genome)
         usedAdr.insert(gene.inAdr);
         usedAdr.insert(gene.outAdr);
     }
+
+    neurons.reserve(usedAdr.size());
     
     for (int i : usedAdr)
     {
         switch (i%128)
         {
         case 0:
-            this->neurons.insert({i, SensorNeuron(i)});
+            this->neuronIdIndexMap.insert({i, neurons.size()});
+            this->neurons.push_back(SensorNeuron(i));
+            break;
         case 1:
-            this->neurons.insert({i, InterNeuron(i)});
+            this->neuronIdIndexMap.insert({i, neurons.size()});
+            this->neurons.push_back(InterNeuron(i));
+            break;
         case 2:
-            this->neurons.insert({i, ActionNeuron(i)});
+            this->neuronIdIndexMap.insert({i, neurons.size()});
+            this->neurons.push_back(ActionNeuron(i));
+            break;
         }
     }
 };
 
+void NeuralNet::optimize()
+{
+    //LMAO KING DO SOMETHING
+}
+
+void NeuralNet::activate()
+{
+    for (Neuron& neuron : neurons)
+    {
+        neuron.activate(0);
+    }
+
+    for (Gene& gene : this->genes)
+    {
+        float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
+        float value = neurons[this->neuronIdIndexMap[gene.inAdr]].getValue();
+        value = value * strength;
+        neurons[this->neuronIdIndexMap[gene.outAdr]].setValue(value);
+    }
+
+    for (Neuron& neuron : neurons)
+    {
+        neuron.activate(1);
+    }
+
+    for (Neuron& neuron : neurons)
+    {
+        neuron.activate(2);
+    };
+};
+
 void NeuralNet::insertNeuron(int index, Neuron neuron)
 {
-    this->neurons.insert({index, neuron});
+    this->neuronIdIndexMap.insert({index, neurons.size()});
+    this->neurons.push_back(neuron);
 }
 
 forward_list<Gene> NeuralNet::getGenes()
