@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
-#include <unordered_set>
+#include <set>
+#include <vector>
 #include "Neuron.h"
 #include "../Genome.h"
 
@@ -19,9 +20,9 @@ public:
     void insertNeuron(int index, Neuron neuron);
     void optimize();
     void activate();
-    unordered_set<int> checkPaths();
+    vector<int> checkPaths();
 
     forward_list<Gene> getGenes();
 private:
-    unordered_set<int> checkPath(int nodeAdr, int depth, unordered_set<int> validatedNodesInPath, unordered_set<int>& validatedNodes);
+    set<int> checkPath(int nodeAdr, int depth, set<int> validatedNodesInPath, set<int>& validatedNodes);
 };

@@ -3,6 +3,9 @@
 #include "InterNeuron.h"
 #include "ActionNeuron.h"
 #include <unordered_set>
+#include <set>
+#include <vector>
+#include <algorithm>
 
 NeuralNet::NeuralNet() {}
 
@@ -42,11 +45,11 @@ forward_list<Gene> NeuralNet::getGenes()
     return this->genes;
 }
 
-unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <int> validatedNodesInPath, unordered_set<int>& validatedNodes) {
+set<int> NeuralNet::checkPath(int nodeAdr, int depth, set <int> validatedNodesInPath, set<int>& validatedNodes) {
     Neuron& neuron = this->neurons[nodeAdr];
 
     if (depth > 1000) {
-        unordered_set<int> emptySet;
+        set<int> emptySet;
         return emptySet;
     }
 
@@ -60,7 +63,7 @@ unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <i
     bool deadEnd = true; //assume node is a dead end
     //Loop through genes
     for (Gene gene : this->genes) {
-        unordered_set<int> nodesBelow;
+        set<int> nodesBelow;
 
         if (gene.inAdr == nodeAdr) { //If current node
             deadEnd = false; //Since the node has the start of a connection is probably not a dead end
@@ -92,7 +95,7 @@ unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <i
         }
     }
     if (deadEnd) {
-        unordered_set<int> emptySet;
+        set<int> emptySet;
         emptySet.clear();
         return emptySet;
     } else {
@@ -101,9 +104,9 @@ unordered_set<int> NeuralNet::checkPath(int nodeAdr, int depth, unordered_set <i
 }
 
 
-unordered_set<int> NeuralNet::checkPaths() {
-    unordered_set <int> activeAdrs;
-    unordered_set <int> emptySet;
+vector<int> NeuralNet::checkPaths() {
+    set <int> activeAdrs;
+    set <int> emptySet;
     unordered_set <int> checkedInAdrs;
 
     emptySet.clear();
@@ -115,5 +118,11 @@ unordered_set<int> NeuralNet::checkPaths() {
           activeAdrs.merge(this->checkPath(gene.inAdr,0,emptySet,activeAdrs));
       }  
     }
-    return activeAdrs;
+    std::vector<int> activeAdrsVec;
+    activeAdrsVec.reserve(activeAdrs.size());
+
+    for (int adr : activeAdrs) {
+        activeAdrsVec.push_back(adr);
+    }
+    return activeAdrsVec;
 }
