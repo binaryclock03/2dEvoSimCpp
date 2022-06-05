@@ -7,6 +7,8 @@
 
 using namespace std;
 
+class Simulation;
+
 class NeuralNet
 {
 protected:
@@ -20,7 +22,7 @@ public:
     void buildNet(Genome genome);
     void insertNeuron(int index, Neuron neuron);
     void optimize();
-    void activate();
+    void activate(Simulation *simulation);
     vector<int> checkPaths();
 
     forward_list<Gene> getGenes();

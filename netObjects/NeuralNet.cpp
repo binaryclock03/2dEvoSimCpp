@@ -1,4 +1,5 @@
 #include "NeuralNet.h"
+#include "Neuron.h"
 #include "SensorNeuron.h"
 #include "InterNeuron.h"
 #include "ActionNeuron.h"
@@ -49,7 +50,7 @@ void NeuralNet::optimize()
     //LMAO KING DO SOMETHING
 }
 
-void NeuralNet::activate()
+void NeuralNet::activate(Simulation *simulation)
 {
     for (Neuron& neuron : neurons)
     {

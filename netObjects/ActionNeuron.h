@@ -2,6 +2,8 @@
 #pragma once
 #include "Neuron.h"
 
+class NeuralNet;
+
 class ActionNeuron: public Neuron
 {
 protected:

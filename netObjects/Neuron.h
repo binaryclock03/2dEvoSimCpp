@@ -4,6 +4,8 @@
 
 using namespace std;
 
+class NeuralNet;
+
 class Neuron
 {
 protected:
