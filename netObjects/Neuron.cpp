@@ -1,4 +1,5 @@
 #include "Neuron.h"
+#include "NeuralNet.h"
 
 Neuron::Neuron() {} ;
 

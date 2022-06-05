@@ -5,10 +5,10 @@
 class ActionNeuron: public Neuron
 {
 protected:
-    void (*actionFunctionPos)(int);
-    void (*actionFunctionNeg)(int);
+    void (*actionFunctionPos)(Neuron*, NeuralNet*);
+    void (*actionFunctionNeg)(Neuron*, NeuralNet*);
 public:
     ActionNeuron(int address);
-    ActionNeuron(int address, void (*funcPos)(int), void (*funcNeg)(int));
-    void activate(int action);
+    ActionNeuron(int address, void (*funcPos)(Neuron*, NeuralNet*), void (*funcNeg)(Neuron*, NeuralNet*));
+    void activate(int action, NeuralNet* brain);
 };

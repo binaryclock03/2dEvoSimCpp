@@ -5,9 +5,9 @@
 class SensorNeuron: public Neuron
 {
 protected:
-    float (*sensorFunction)(int);
+    float (*sensorFunction)(Neuron*, NeuralNet*);
 public:
     SensorNeuron(int address);
-    SensorNeuron(int address, float (*func)(int));
-    void activate(int action);
+    SensorNeuron(int address, float (*sensorFunction)(Neuron*, NeuralNet*));
+    void activate(int action, NeuralNet* brain);
 };

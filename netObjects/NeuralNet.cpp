@@ -53,7 +53,7 @@ void NeuralNet::activate()
 {
     for (Neuron& neuron : neurons)
     {
-        neuron.activate(0);
+        neuron.activate(0, this);
     }
 
     for (Gene& gene : this->genes)
@@ -66,12 +66,12 @@ void NeuralNet::activate()
 
     for (Neuron& neuron : neurons)
     {
-        neuron.activate(1);
+        neuron.activate(1, this);
     }
 
     for (Neuron& neuron : neurons)
     {
-        neuron.activate(2);
+        neuron.activate(2, this);
     };
 };
 

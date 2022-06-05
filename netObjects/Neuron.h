@@ -17,7 +17,7 @@ public:
     Neuron();
     Neuron(int address);
 
-    void activate(int action);
+    void activate(int action, NeuralNet* brain);
 
     int getAddress() { return this->address; }
     void setAddress(int address) { this->address = address; }

@@ -1,4 +1,5 @@
 #include "InterNeuron.h"
+#include "NeuralNet.h"
 #include <cmath>
 #include <numeric>
 
@@ -8,7 +9,7 @@ InterNeuron::InterNeuron(int address)
     this->depth = 0;
 }
 
-void InterNeuron::activate(int action)
+void InterNeuron::activate(int action, NeuralNet* brain)
 {
     switch(action) {
         case 1:
