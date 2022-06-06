@@ -1,5 +1,5 @@
-#include "Neuron.h"
-#include "NeuralNet.h"
+#include "netObjects/Neuron.h"
+#include "netObjects/NeuralNet.h"
 #include <list>
 
 typedef float (*senFunc)(Neuron*, NeuralNet*, Simulation*);

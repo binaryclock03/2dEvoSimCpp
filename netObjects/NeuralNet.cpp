@@ -8,7 +8,7 @@
 #include <set>
 #include <vector>
 #include <algorithm>
-#include "functions.h"
+#include "../functions.h"
 
 NeuralNet::NeuralNet() {}
 
@@ -168,4 +168,8 @@ vector<int> NeuralNet::checkPaths() {
         activeAdrsVec.push_back(adr);
     }
     return activeAdrsVec;
+}
+
+void NeuralNet::addNeuronFunctions() {
+
 }

@@ -10,6 +10,7 @@
 using namespace std;
 
 Population::Population() {
+    this->generation = 0;
     char name[5] = {65,65,65,65,0};
     bool invalid = true;
     while (invalid) {
@@ -120,7 +121,7 @@ void Population::reproduce(float mutationRate) {
         int amountToFill = this->numberOfGenomes - this->genomes.size();
         int currentSize = genomes.size();
         for (int i = 0; i < amountToFill; i++) {
-            this->genomes.push_back(this->genomes[randInt(0,amountToFill)].copy());
+            this->genomes.push_back(this->genomes[randInt(0,currentSize)].copy());
         }
     }
     for (int i = 0; i < this->numberOfGenomes;i++) {
@@ -138,6 +139,9 @@ void Population::nextGeneration(float mutationRate, vector<int> survivors) {
     int j = 0;
 
     for (int i = 0; i < this->numberOfGenomes; i++) {
+        if (j >= survivors.size()) {
+            break;
+        }
         if (i == survivors[j]) {
             newGenomes.push_back(this->genomes[i]);
             j++;
