@@ -9,5 +9,5 @@ int main()
     pop.generateGenomes(100, 4, 4, 4, 4);
 
     Simulation sim = Simulation();
-    
+    sim.buildFromPop(pop);
 }
