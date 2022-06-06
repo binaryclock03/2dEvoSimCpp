@@ -5,6 +5,7 @@
 using namespace std;
 
 class NeuralNet;
+class Simulation;
 
 class Neuron
 {
@@ -19,7 +20,7 @@ public:
     Neuron();
     Neuron(int address);
 
-    void activate(int action, NeuralNet* brain);
+    void activate(int action, NeuralNet* brain, Simulation *simulation);
 
     int getAddress() { return this->address; }
     void setAddress(int address) { this->address = address; }

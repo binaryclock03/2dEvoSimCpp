@@ -6,5 +6,5 @@ class InterNeuron: public Neuron
 {
 public:
     InterNeuron(int address);
-    void activate(int action, NeuralNet* brain);
+    void activate(int action, NeuralNet* brain, Simulation *simulation);
 };

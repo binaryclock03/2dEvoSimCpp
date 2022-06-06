@@ -54,10 +54,10 @@ void NeuralNet::activate(Simulation *simulation)
 {
     for (Neuron& neuron : neurons)
     {
-        neuron.activate(0, this);
+        neuron.activate(0, this, simulation);
     }
 
-    for (Gene& gene : this->genes)
+    for (Gene gene : this->genes)
     {
         float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
         float value = neurons[this->neuronIdIndexMap[gene.inAdr]].getValue();
@@ -67,12 +67,12 @@ void NeuralNet::activate(Simulation *simulation)
 
     for (Neuron& neuron : neurons)
     {
-        neuron.activate(1, this);
+        neuron.activate(1, this, simulation);
     }
 
     for (Neuron& neuron : neurons)
     {
-        neuron.activate(2, this);
+        neuron.activate(2, this, simulation);
     };
 };
 

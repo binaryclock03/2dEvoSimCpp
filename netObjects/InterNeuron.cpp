@@ -9,7 +9,7 @@ InterNeuron::InterNeuron(int address)
     this->depth = 0;
 }
 
-void InterNeuron::activate(int action, NeuralNet* brain)
+void InterNeuron::activate(int action, NeuralNet* brain, Simulation *simulation)
 {
     switch(action) {
         case 1:

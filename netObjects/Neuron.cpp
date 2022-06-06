@@ -9,7 +9,7 @@ Neuron::Neuron(int address)
     this->depth = 0;
 }
 
-void Neuron::activate(int action, NeuralNet *brain)
+void Neuron::activate(int action, NeuralNet *brain, Simulation *simulation)
 {
 
 }

@@ -9,7 +9,7 @@ ActionNeuron::ActionNeuron(int address)
     this->depth = 0;
 }
 
-ActionNeuron::ActionNeuron(int address, void (*funcPos)(Neuron*, NeuralNet*), void (*funcNeg)(Neuron*, NeuralNet*))
+ActionNeuron::ActionNeuron(int address, void (*funcPos)(Neuron*, NeuralNet*, Simulation*), void (*funcNeg)(Neuron*, NeuralNet*, Simulation*))
 {
     this->actionFunctionNeg = funcNeg;
     this->actionFunctionPos = funcPos;
@@ -17,7 +17,7 @@ ActionNeuron::ActionNeuron(int address, void (*funcPos)(Neuron*, NeuralNet*), vo
     this->depth = 0;
 };
 
-void ActionNeuron::activate(int action, NeuralNet* brain)
+void ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulation)
 {
     switch(action) {
         case 1:
@@ -25,9 +25,9 @@ void ActionNeuron::activate(int action, NeuralNet* brain)
         case 2:
             if(random() < abs(value))
                 if(this->value > 0)
-                    this->actionFunctionPos(this, brain);
+                    this->actionFunctionPos(this, brain, simulation);
                 else
-                    this->actionFunctionNeg(this, brain);
+                    this->actionFunctionNeg(this, brain, simulation);
                 break;
             this->incomingLast = this->incomingNext;
             this->incomingNext = 0;
