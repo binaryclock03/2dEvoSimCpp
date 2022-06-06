@@ -31,5 +31,5 @@ public:
     int getCreatureY(int id);
     int getCreatureX(int id);
 
-    vector<int> returnSurvivors();
+    vector<int> returnSurvivornts();
 };

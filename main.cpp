@@ -29,5 +29,7 @@ int main()
     // cout << sim.returnNonSurvivors().size() << endl;
     
     }
-    //cin.get();
+    cout << endl;
+    cout << sim.returnSurvivors().size() << endl;
+    cin.get();
 }
