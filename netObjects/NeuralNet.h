@@ -20,6 +20,7 @@ public:
     NeuralNet();
 
     void buildNet(Genome genome);
+    void addNeuronFunctions();
     void insertNeuron(int index, Neuron neuron);
     void optimize();
     void activate(Simulation *simulation);

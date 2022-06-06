@@ -1,5 +1,16 @@
 #include "Neuron.h"
 #include "NeuralNet.h"
+#include <list>
+
+typedef float (*senFunc)(Neuron*, NeuralNet*, Simulation*);
+typedef void (*actFunc)(Neuron*, NeuralNet*, Simulation*);
+
+struct NeuronFunctions
+{
+    NeuronFunctions();
+    std::list<senFunc> sensorFuncs;
+    std::list<actFunc> actionFuncs;
+};
 
 //Sensors
 float alwaysOn(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
