@@ -45,12 +45,12 @@ void Simulation::buildFromPop(Population population)
     }
 }
 
-vector<int> Simulation::returnSurvivors()
+vector<int> Simulation::returnSurvivornts()
 {
     vector<int> survivors;
     for (int i = 0; i < creatures.size(); i++)
     {
-        if (this->getCreatureY(i) > ((int) this->gridBounds[1]/2))
+        if (this->getCreatureY(i) < ((int) this->gridBounds[1]/2))
             survivors.push_back(i);
     }
     return survivors;
