@@ -16,7 +16,7 @@ class Population {
     int getGeneration() {return this->generation;};
     int getNumberOfGenomes() {return this->numberOfGenomes;};
     void reproduce(float mutationRate);
-    void nextGeneration(float mutationRate);
+    void nextGeneration(float mutationRate, vector<int> nonSurvivors);
 
     private:
     string name;

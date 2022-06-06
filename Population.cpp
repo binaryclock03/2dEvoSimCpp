@@ -128,8 +128,23 @@ void Population::reproduce(float mutationRate) {
     }
 }
 
-void Population::nextGeneration(float mutationRate) {
+void Population::nextGeneration(float mutationRate, vector<int> survivors) {
     this->generation++;
+
+    survivors.shrink_to_fit();
+    
+    vector<Genome> newGenomes;
+    newGenomes.reserve(this->numberOfGenomes);
+    int j = 0;
+
+    for (int i = 0; i < this->numberOfGenomes; i++) {
+        if (i == survivors[j]) {
+            newGenomes.push_back(this->genomes[i]);
+            j++;
+        }
+    }
+
+    this->genomes = newGenomes;
     this->reproduce(mutationRate);
     this->saveGeneration();
 }

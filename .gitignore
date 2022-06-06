@@ -37,3 +37,5 @@
 /.vscode
 .vscode/tasks.json
 .vscode/c_cpp_properties.json
+/Debug
+/.vs/2dEvoSimCpp/v16
