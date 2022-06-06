@@ -15,7 +15,7 @@ int hexToInt(string str);
 
 struct Timer
 {
-    std::chrono::time_point<chrono::system_clock> start, end;
+    std::chrono::time_point<chrono::steady_clock> start, end;
     std::chrono::duration<double> duration;
     string name = "Unnamed Timer";
 
