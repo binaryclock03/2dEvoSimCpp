@@ -14,11 +14,11 @@ int main()
     sim.simulate();
     sim.optimize();
 
-    for (int i : sim.returnSurvivors())
+    for (int i : sim.returnSurvivornts())
     {
         cout << i << " ";
     }
     cout << endl;
-    cout << sim.returnSurvivors().size() << endl;
+    cout << sim.returnSurvivornts().size() << endl;
     cin.get();
 }
