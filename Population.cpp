@@ -18,7 +18,7 @@ Population::Population() {
             name[i] = randInt(65,91);
         }
         string nameStr(name);
-        string filePath = "Populations//" + nameStr + ".csv";
+        string filePath = "Populations/" + nameStr + ".csv";
         invalid = std::filesystem::exists(filePath);
         this->name = nameStr;
     }
@@ -51,7 +51,7 @@ Genome Population::getGenome(int index)
 
 void Population::saveGeneration() {
 
-    string filePath = "Populations//" + this->name + ".csv";
+    string filePath = "Populations/" + this->name + ".csv";
 
     std::fstream file;
     file.open(filePath, file.app | file.out);
@@ -73,7 +73,7 @@ void Population::saveGeneration() {
 
 void Population::loadGeneration(int generation) {
 
-    string filePath = "Populations//" + this->name + ".csv";
+    string filePath = "Populations/" + this->name + ".csv";
 
     std::fstream file; 
     file.open(filePath, file.ate | file.in);

@@ -5,7 +5,6 @@
 #include "ActionNeuron.h"
 #include "../util.h"
 #include <unordered_set>
-#include <set>
 #include <vector>
 #include <algorithm>
 #include "../functions.h"
