@@ -1,10 +1,16 @@
 #include "SensorNeuron.h"
 #include "NeuralNet.h"
+#include <iostream>
 
-SensorNeuron::SensorNeuron(int address)
+SensorNeuron::SensorNeuron()
 {
-    this->address = address;
+    this->address = 0;
+    this->sensorFunction = 0;
     this->depth = 0;
+    this->incoming = 0;
+    this->incomingLast = 0;
+    this->incomingNext = 0;
+    this->value = 0;
 }
 
 SensorNeuron::SensorNeuron(int address, float (*sensorFunction)(Neuron*, NeuralNet*, Simulation*))
@@ -12,6 +18,10 @@ SensorNeuron::SensorNeuron(int address, float (*sensorFunction)(Neuron*, NeuralN
     this->address = address;
     this->sensorFunction = sensorFunction;
     this->depth = 0;
+    this->incoming = 0;
+    this->incomingLast = 0;
+    this->incomingNext = 0;
+    this->value = 0;
 };
 
 void SensorNeuron::activate(int action, NeuralNet* brain, Simulation *simulation)
@@ -22,5 +32,3 @@ void SensorNeuron::activate(int action, NeuralNet* brain, Simulation *simulation
             break;
     }
 };
-
-

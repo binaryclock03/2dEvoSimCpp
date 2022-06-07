@@ -1,4 +1,5 @@
 #include "functions.h"
+#include <iostream>
 
 NeuronFunctions::NeuronFunctions()
 {
@@ -18,6 +19,7 @@ NeuronFunctions::NeuronFunctions()
 //sensors
 float alwaysOn(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
+    //std::cout << "hello this is always on" << std::endl;
     return 1.0f;
 }
 

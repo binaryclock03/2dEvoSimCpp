@@ -1,16 +1,16 @@
+#pragma once
 #include "netObjects/Neuron.h"
 #include "netObjects/NeuralNet.h"
-#include <list>
 
 typedef float (*senFunc)(Neuron*, NeuralNet*, Simulation*);
 typedef void (*actFunc)(Neuron*, NeuralNet*, Simulation*);
 
-struct NeuronFunctions
+static struct NeuronFunctions
 {
     NeuronFunctions();
-    std::list<senFunc> sensorFuncs;
-    std::list<actFunc> actionFuncs;
-};
+    std::vector<senFunc> sensorFuncs;
+    std::vector<actFunc> actionFuncs;
+} funcs;
 
 //Sensors
 float alwaysOn(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
