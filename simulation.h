@@ -12,6 +12,7 @@ class Simulation
 protected:
     short gridBounds[2];
     short tick;
+    short maxTick;
     map<int, int> PosId;
     map<int, int> IdPos;
     vector<NeuralNet> creatures;
@@ -30,6 +31,9 @@ public:
     int getCreaturePos(int id);
     int getCreatureY(int id);
     int getCreatureX(int id);
+
+    short getSimTick() { return this->tick; };
+    short getMaxSimTick() { return this->maxTick; };
 
     vector<int> returnSurvivors();
 };

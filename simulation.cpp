@@ -19,9 +19,14 @@ void Simulation::simulate()
 
 void Simulation::simulate(int steps)
 {
-    for (int i = 0; i<steps; i++)
+    this->maxTick = steps;
+    for (short i = 0; i < steps; i++)
+    {
+        this->tick = i;
         this->simulate();
+    }
 }
+
 
 void Simulation::optimize()
 {

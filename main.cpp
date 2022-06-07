@@ -11,7 +11,7 @@ int main()
     float mutationRate = 0.01f;
     int populationSize = 1000;
 
-    ProgressTracker Pt = ProgressTracker(mutationRate, populationSize, false);
+    ProgressTracker Pt = ProgressTracker(mutationRate, populationSize, true);
     
     Population *pop = new Population();
     pop->generateGenomes(populationSize, 4, 4, 4, 1);

@@ -8,6 +8,7 @@ NeuronFunctions::NeuronFunctions()
     this->sensorFuncs.push_back(centerBiasY);
     this->sensorFuncs.push_back(posX);
     this->sensorFuncs.push_back(posY);
+    this->sensorFuncs.push_back(age);
 
     this->actionFuncs.push_back(moveX);
     this->actionFuncs.push_back(moveY);
@@ -46,6 +47,13 @@ float posY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
     return scale(simulation->getCreatureY(brain->getId()), 0, 128, 0, 1.0);
 }
+
+float age(Neuron* neuron, NeuralNet* brain, Simulation* simulation) 
+{
+    return scale(simulation->getSimTick(), 0, simulation->getMaxSimTick(), 0, 1);
+}
+
+
 
 //actions
 void moveX(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
