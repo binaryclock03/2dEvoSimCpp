@@ -56,6 +56,7 @@ int hexToInt(string str) {
 
 Timer::Timer()
 {
+    this->name = "Unnamed timer";
     this->start = std::chrono::high_resolution_clock::now();
 }
 
@@ -70,6 +71,7 @@ Timer::~Timer()
     this->end = std::chrono::high_resolution_clock::now();
     this->duration = this->end - this->start;
     std::cout << name <<" took: " << duration.count() << "s" << std::endl;
+    std::cout << std::endl;
 }
 
 float clamp(float num, float minValue, float maxValue) {

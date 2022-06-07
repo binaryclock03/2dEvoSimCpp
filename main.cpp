@@ -2,34 +2,39 @@
 #include "Population.h"
 #include <iostream>
 #include "util.h"
+#include "ProgressTracker.h"
 
 using namespace std;
 
 int main()
 {
-    Population pop = Population();
-    pop.generateGenomes(1000, 4, 4, 4, 1);
-    //pop.saveGeneration();
+    float mutationRate = 0.01f;
+    int populationSize = 1000;
+
+    ProgressTracker Pt = ProgressTracker(mutationRate, populationSize);
+    
+    Population *pop = new Population();
+    pop->generateGenomes(populationSize, 4, 4, 4, 1);
+    pop->saveGeneration();
 
     
-    while(true) 
+    while(!Pt.targetReached) 
     {   
+        std::cout << "Generation " << to_string(pop->getGeneration()) << " started." << std::endl;
+        ProgressTrackerTimer t("Generation " + to_string(pop->getGeneration()),Pt);
+
         Simulation sim = Simulation();
-        Timer t("Main Loop Timer");
-        sim.buildFromPop(pop);
-        sim.simulate(256);
+        sim.buildFromPop(*pop);
         sim.optimize();
-
-        pop.nextGeneration(0.01f,sim.returnSurvivors());
-
+        sim.simulate(256);
 
 
-        // for (int i : sim.returnNonSurvivors())
-        // {
-        //     cout << i << " ";
-        // }
-        // cout << endl;
-        // cout << sim.returnNonSurvivors().size() << endl;
-    
+        int numberOfSurvivors;
+        numberOfSurvivors = sim.returnSurvivors().size();
+        std::cout << "   " << numberOfSurvivors << " Survivors" << std::endl;
+        
+        Pt.logSurvivorCount(numberOfSurvivors,pop->getGeneration());
+
+        pop->nextGeneration(mutationRate,sim.returnSurvivors());
     }
 }
