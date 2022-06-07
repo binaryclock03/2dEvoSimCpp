@@ -117,14 +117,14 @@ void Population::loadGeneration(int generation) {
 }
 
 void Population::reproduce(float mutationRate) {
-    if (this->genomes.size() < this->numberOfGenomes && this->numberOfGenomes != 0) {
+    if (this->genomes.size() < this->numberOfGenomes && this->genomes.size() != 0) {
         int amountToFill = this->numberOfGenomes - this->genomes.size();
         int currentSize = genomes.size();
         for (int i = 0; i < amountToFill; i++) {
             this->genomes.push_back(this->genomes[randInt(0,currentSize)].copy());
         }
     }
-    else if (this->numberOfGenomes == 0)
+    else if (this->genomes.size() == 0)
     {
         this->generateGenomes(this->numberOfGenomes, this->genesPerGenome, this->maxInIndex, this->maxOutIndex, this->maxInterIndex);
     }
