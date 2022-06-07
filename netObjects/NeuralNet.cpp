@@ -102,7 +102,7 @@ forward_list<Gene> NeuralNet::getGenes()
 }
 
 set<int> NeuralNet::checkPath(int nodeAdr, int depth, set <int> validatedNodesInPath, set<int>& validatedNodes) {
-    auto& neuron = this->neurons[nodeAdr];
+    auto& neuron = this->neurons[this->neuronIdIndexMap[nodeAdr]];
 
     if (depth > 1000) {
         set<int> emptySet;
@@ -128,14 +128,14 @@ set<int> NeuralNet::checkPath(int nodeAdr, int depth, set <int> validatedNodesIn
                 nodesBelow.insert(gene.outAdr+256);
 
                 //Checks if this action neuron needs to have its depth assigned
-                if(this->neurons[gene.outAdr]->getDepth() == 0 || this->neurons[gene.outAdr]->getDepth() < neuron->getDepth()) {
-                    neurons[gene.outAdr]->setDepth(neuron->getDepth()+1);
+                if(this->neurons[this->neuronIdIndexMap[gene.outAdr]]->getDepth() == 0 || this->neurons[this->neuronIdIndexMap[gene.outAdr]]->getDepth() < neuron->getDepth()) {
+                    neurons[this->neuronIdIndexMap[gene.outAdr]]->setDepth(neuron->getDepth()+1);
                 }
             } else if (validatedNodes.count(gene.outAdr) < 0)
             {
                 nodesBelow.insert(gene.outAdr);
             } else if ((gene.inAdr != gene.outAdr) && //Checks if the next inter neuron is not its self or lower 
-            (this->neurons[gene.outAdr]->getDepth() == 0 || this->neurons[gene.outAdr]->getDepth() > neuron->getDepth()))
+            (this->neurons[this->neuronIdIndexMap[gene.outAdr]]->getDepth() == 0 || this->neurons[this->neuronIdIndexMap[gene.outAdr]]->getDepth() > neuron->getDepth()))
             {
                 nodesBelow.merge(this->checkPath(gene.outAdr,depth+1,validatedNodesInPath,validatedNodes)); //Check path of the next node
             }
@@ -145,7 +145,7 @@ set<int> NeuralNet::checkPath(int nodeAdr, int depth, set <int> validatedNodesIn
                 validatedNodesInPath.merge(nodesBelow);
             }
 
-        } else if (this->neurons[gene.outAdr]->getDepth() != 0 && gene.inAdr == nodeAdr && this->neurons[gene.outAdr]->getDepth() < neuron->getDepth())
+        } else if (this->neurons[this->neuronIdIndexMap[gene.outAdr]]->getDepth() != 0 && gene.inAdr == nodeAdr && this->neurons[this->neuronIdIndexMap[gene.outAdr]]->getDepth() < neuron->getDepth())
         {
             validatedNodesInPath.insert(nodeAdr);
         }
