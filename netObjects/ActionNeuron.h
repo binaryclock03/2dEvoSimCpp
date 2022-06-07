@@ -7,10 +7,8 @@ class NeuralNet;
 class ActionNeuron: public Neuron
 {
 protected:
-    void (*actionFunctionPos)(Neuron*, NeuralNet*, Simulation*);
-    void (*actionFunctionNeg)(Neuron*, NeuralNet*, Simulation*);
+    void (*actionFunction)(Neuron*, NeuralNet*, Simulation*);
 public:
-    ActionNeuron(int address);
-    ActionNeuron(int address, void (*funcPos)(Neuron*, NeuralNet*, Simulation*), void (*funcNeg)(Neuron*, NeuralNet*, Simulation*));
+    ActionNeuron(int address, void(*func)(Neuron*, NeuralNet*, Simulation*));
     void activate(int action, NeuralNet* brain, Simulation* simulation);
 };

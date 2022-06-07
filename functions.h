@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "util.h"
 #include "netObjects/Neuron.h"
 #include "netObjects/NeuralNet.h"
 #include "simulation.h"

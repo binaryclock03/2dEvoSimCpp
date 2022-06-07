@@ -40,6 +40,8 @@ public:
     vector<int> checkPaths();
 
     forward_list<Gene> getGenes();
+
+    int getId();
 private:
     set<int> checkPath(int nodeAdr, int depth, set<int> validatedNodesInPath, set<int>& validatedNodes);
 };

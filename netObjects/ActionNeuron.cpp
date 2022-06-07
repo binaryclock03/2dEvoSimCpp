@@ -3,16 +3,12 @@
 #include <cmath>
 #include <numeric>
 
-ActionNeuron::ActionNeuron(int address)
+ActionNeuron::ActionNeuron(int address, void (*func)(Neuron*, NeuralNet*, Simulation*))
 {
-    this->address = address;
-    this->depth = 0;
-}
-
-ActionNeuron::ActionNeuron(int address, void (*funcPos)(Neuron*, NeuralNet*, Simulation*), void (*funcNeg)(Neuron*, NeuralNet*, Simulation*))
-{
-    this->actionFunctionNeg = funcNeg;
-    this->actionFunctionPos = funcPos;
+    this->incoming = 0;
+    this->incomingLast = 0;
+    this->incomingNext = 0;
+    this->actionFunction = func;
     this->address = address;
     this->depth = 0;
 };
@@ -22,15 +18,15 @@ void ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulation
     switch(action) {
         case 1:
             this->value = tanh(incoming + incomingLast);
+            break;
         case 2:
-            if(random() < abs(value))
-                if(this->value > 0)
-                    this->actionFunctionPos(this, brain, simulation);
-                else
-                    this->actionFunctionNeg(this, brain, simulation);
-                break;
+            if (true)//random() < abs(value)
+            {
+                this->actionFunction(this, brain, simulation);
+            }
             this->incomingLast = this->incomingNext;
             this->incomingNext = 0;
+            break;
     }
 };
 

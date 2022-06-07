@@ -21,32 +21,35 @@ void NeuralNet::buildNet(Genome genome)
         Gene gene = genome.getGene(i);
         this->genes.push_front(gene);
         usedAdr.insert(gene.inAdr);
-        usedAdr.insert(gene.outAdr);
+        if (gene.outAdr < 128)
+            usedAdr.insert(gene.outAdr+256);
+        else
+            usedAdr.insert(gene.outAdr);
     }
 
     this->neurons.reserve(usedAdr.size());
     
     for (int i : usedAdr)
     {
-        switch (i%128)
+        switch ((int)(i / 128))
         {
         case 0:
         {
-            shared_ptr<SensorNeuron> neuron(new SensorNeuron(i, funcs.sensorFuncs[i%128]));
+            shared_ptr<SensorNeuron> neuron(new SensorNeuron(i, funcs.sensorFuncs[i]));
             this->neuronIdIndexMap.insert({ i, neurons.size() });
             this->neurons.push_back(neuron);
         }
         break;
         case 1:
         {
-            shared_ptr<InterNeuron> neuron(new InterNeuron(i % 128));
+            shared_ptr<InterNeuron> neuron(new InterNeuron(i));
             this->neuronIdIndexMap.insert({ i, neurons.size() });
             this->neurons.push_back(neuron);
         }
         break;
         case 2:
         {
-            shared_ptr<ActionNeuron> neuron(new ActionNeuron(i, funcs.actionFuncs[i % 128], funcs.actionFuncs[i % 128]));
+            shared_ptr<ActionNeuron> neuron(new ActionNeuron(i, funcs.actionFuncs[i%128]));
             this->neuronIdIndexMap.insert({ i, neurons.size() });
             this->neurons.push_back(neuron);
         }
@@ -74,9 +77,12 @@ void NeuralNet::activate(Simulation *simulation)
         for (Gene gene : this->genes)
         {
             float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
-            float value = neurons[this->neuronIdIndexMap[gene.inAdr]]->getValue();
+            float value = this->neurons[this->neuronIdIndexMap[gene.inAdr]]->getValue();
             value = value * strength;
-            neurons[this->neuronIdIndexMap[gene.outAdr]]->setValue(value);
+            if (gene.outAdr > 255)
+                this->neurons[this->neuronIdIndexMap[gene.outAdr+256]]->addIncoming(value);
+            else
+                this->neurons[this->neuronIdIndexMap[gene.outAdr]]->addIncoming(value);
         }
 
         for (auto neuron : this->neurons)
@@ -99,6 +105,11 @@ void NeuralNet::insertNeuron(int index, shared_ptr<Neuron> neuron)
 forward_list<Gene> NeuralNet::getGenes()
 {
     return this->genes;
+}
+
+int NeuralNet::getId()
+{
+    return this->id;
 }
 
 set<int> NeuralNet::checkPath(int nodeAdr, int depth, set <int> validatedNodesInPath, set<int>& validatedNodes) {

@@ -29,45 +29,51 @@ float alwaysOff(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 
 float centerBiasX(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-    return 0.0f;
+    return scale(simulation->getCreatureX(brain->getId()), 0, 128, -1.0, 1.0);
 }
 
 float centerBiasY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-    return 0.0f;
+    return scale(simulation->getCreatureY(brain->getId()), 0, 128, -1.0, 1.0);
 }
 
 float posX(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-    return 0.0f;
+    return scale(simulation->getCreatureX(brain->getId()), 0, 128, 0, 1.0);
 }
 
 float posY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-    return 0.0f;
+    return scale(simulation->getCreatureY(brain->getId()), 0, 128, 0, 1.0);
 }
 
 //actions
 void moveX(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-    if (neuron->getValue() > 0) simulation->moveCreature(1, 1, 0);
-    else simulation->moveCreature(1, -1, 0);
+    //cout << "IM MOVING X " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
+    if (neuron->getValue() > 0) simulation->moveCreature(brain->getId(), 1, 0);
+    else simulation->moveCreature(brain->getId(), -1, 0);
+    //cout << "IVE MOVED X " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
 }
 
 void moveY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-    if (neuron->getValue() > 0) simulation->moveCreature(1, 0, 1);
-    else simulation->moveCreature(1, 0, -1);
+    //cout << "IM MOVING Y " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
+    if (neuron->getValue() > 0) simulation->moveCreature(brain->getId(), 0, 1);
+    else simulation->moveCreature(brain->getId(), 0, -1);
+    //cout << "IVE MOVED Y " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
 }
 
 void moveRand(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
+    //cout << "IM MOVING RAND " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
     int x = randInt(-1, 1);
     int y = randInt(-1, 1);
-    simulation->moveCreature(1, x, y);
+    simulation->moveCreature(brain->getId(), x, y);
+    //cout << "IM MOVING RAND " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
 }
 
 void kill(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-    cout << "NOM NOM NOM KINGS BRAINS WERE GO... THERES NOTHING HERE" << endl;
+    //cout << "NOM NOM NOM KINGS BRAINS WERE GO... THERES NOTHING HERE" << endl;
 }

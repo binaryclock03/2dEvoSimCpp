@@ -64,12 +64,12 @@ int Simulation::getCreaturePos(int id)
 
 int Simulation::getCreatureX(int id)
 {
-    return (int) this->getCreaturePos(id) / this->gridBounds[0];
+    return (int) this->getCreaturePos(id) % this->gridBounds[0];
 }
 
 int Simulation::getCreatureY(int id)
 {
-    return (int) this->getCreaturePos(id) % this->gridBounds[1];
+    return (int) this->getCreaturePos(id) / this->gridBounds[1];
 }
 
 void Simulation::setCreaturePos(int id, int pos)
@@ -83,13 +83,14 @@ void Simulation::setCreaturePos(int id, int pos)
 void Simulation::moveCreature(int id, int x, int y)
 {
     int pos = this->getCreaturePos(id);
-    if(!(this->getCreatureX(id) == (this->gridBounds[0]-1) && x > 0))
+    if (!(this->getCreatureX(id) == (this->gridBounds[0] - 1) && x > 0))
         pos += x;
+    else if (!(this->getCreatureX(id) == 0 && x < 0))
+        pos += x;
+
     if(!(this->getCreatureY(id) == (this->gridBounds[1]-1) && y > 0))
         pos += y*this->gridBounds[0];
-    if(!(this->getCreatureX(id) == 0 && x < 0))
-        pos += x;
-    if(!(this->getCreatureY(id) == 0 && y < 0))
+    else if(!(this->getCreatureY(id) == 0 && y < 0))
         pos += y*this->gridBounds[0];
     this->setCreaturePos(id, pos);
 }

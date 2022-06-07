@@ -22,3 +22,13 @@ Neuron::Neuron(int address)
 }
 
 Neuron::~Neuron() {}
+
+void Neuron::addIncoming(int incoming)
+{
+    this->incoming += incoming;
+}
+
+void Neuron::addIncomingNext(int incoming)
+{
+    this->incomingNext += incoming;
+}

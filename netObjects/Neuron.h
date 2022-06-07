@@ -31,4 +31,7 @@ public:
 
     float getValue() { return this->value; }
     void setValue(float value) { this->value = value; }
+
+    void addIncoming(int incoming);
+    void addIncomingNext(int incoming);
 };
