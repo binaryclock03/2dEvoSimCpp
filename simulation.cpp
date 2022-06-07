@@ -88,14 +88,12 @@ void Simulation::setCreaturePos(int id, int pos)
 void Simulation::moveCreature(int id, int x, int y)
 {
     int pos = this->getCreaturePos(id);
-    if (!(this->getCreatureX(id) == (this->gridBounds[0] - 1) && x > 0))
-        pos += x;
-    else if (!(this->getCreatureX(id) == 0 && x < 0))
+
+    if ((this->getCreatureX(id) != 0 && this->getCreatureX(id) != this->gridBounds[0]) || (this->getCreatureX(id) == this->gridBounds[0] && x < 0) || (this->getCreatureX(id) == 0 && x > 0))
         pos += x;
 
-    if(!(this->getCreatureY(id) == (this->gridBounds[1]-1) && y > 0))
+    if ((this->getCreatureY(id) != 0 && this->getCreatureY(id) != this->gridBounds[1]) || (this->getCreatureY(id) == this->gridBounds[1] && y < 0) || (this->getCreatureY(id) == 0 && y > 0))
         pos += y*this->gridBounds[0];
-    else if(!(this->getCreatureY(id) == 0 && y < 0))
-        pos += y*this->gridBounds[0];
+
     this->setCreaturePos(id, pos);
 }
