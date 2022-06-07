@@ -10,7 +10,7 @@ using namespace std;
 class ProgressTracker {
 public:
 	bool targetReached = false;
-	ProgressTracker(float mutationRate, int populationSize);
+	ProgressTracker(float mutationRate, int populationSize, bool autoStop);
 	void logSurvivorCount(int survivors,int generation);
 	void logGenerationTime(float duration);
 
@@ -20,6 +20,7 @@ private:
 	int lastGeneration = 0;
 	int targetSurvivors;
 	float lastGenerationTime;
+	bool autoStop;
 };
 
 struct ProgressTrackerTimer {

@@ -1,6 +1,10 @@
 #include "ProgressTracker.h"
-ProgressTracker::ProgressTracker(float mutationRate, int populationSize) {
-	this->targetSurvivors = populationSize * (mutationRate + 1.0f);
+#include <cmath>
+
+
+ProgressTracker::ProgressTracker(float mutationRate, int populationSize, bool autoStop) {
+	this->targetSurvivors = std::floor(populationSize * (1.0f - mutationRate));
+	this->autoStop = autoStop;
 }
 
 void ProgressTracker::logSurvivorCount(int survivors, int generation) {
@@ -27,11 +31,10 @@ void ProgressTracker::logSurvivorCount(int survivors, int generation) {
 		std::cout << "   The simulation will reach its target in approximatly " << estimatedGenerations << " generations or about " << this->lastGenerationTime*estimatedGenerations << "s." << std::endl;
 	}
 
-	if (averageSurvivors > this->targetSurvivors) {
+	if (averageSurvivors > this->targetSurvivors && this->autoStop) {
 		this->targetReached = true;
 		std::cout << "Simulation Target Reached" << std::endl;
 	}
-
 }
 
 void ProgressTracker::logGenerationTime(float duration) {

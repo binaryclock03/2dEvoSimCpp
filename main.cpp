@@ -11,7 +11,7 @@ int main()
     float mutationRate = 0.01f;
     int populationSize = 1000;
 
-    ProgressTracker Pt = ProgressTracker(mutationRate, populationSize);
+    ProgressTracker Pt = ProgressTracker(mutationRate, populationSize, false);
     
     Population *pop = new Population();
     pop->generateGenomes(populationSize, 4, 4, 4, 1);
@@ -37,4 +37,5 @@ int main()
 
         pop->nextGeneration(mutationRate,sim.returnSurvivors());
     }
+    std::cin.get();
 }
