@@ -57,10 +57,7 @@ vector<int> Simulation::returnSurvivors()
     vector<int> survivors;
     for (int i = 0; i < creatures.size(); i++)
     {
-        int x = this->getCreatureX(i);
-        int y = this->getCreatureY(i);
-
-        if (y > ((int) this->gridBounds[1]/4) && y < ((int)this->gridBounds[1]*3/ 4) && x > ((int)this->gridBounds[0]/4))
+        if (this->getCreatureY(i) > ((int) this->gridBounds[1]/2))
             survivors.push_back(i);
     }
     return survivors;
@@ -83,9 +80,6 @@ int Simulation::getCreatureY(int id)
 
 void Simulation::setCreaturePos(int id, int pos)
 {
-    //cout << id << endl;
-    //cout << this->getCreaturePos(id) << " ";
-    cout << this->PosId.count(pos) << endl;
     if (this->PosId.count(pos) == 0)
     {
         int beforePos = this->IdPos[id];
@@ -93,7 +87,6 @@ void Simulation::setCreaturePos(int id, int pos)
         this->PosId.insert({ pos, id });
         this->IdPos[id] = pos;
     }
-    //cout << this->getCreaturePos(id) << endl;
 }
 
 void Simulation::moveCreature(int id, int x, int y)
