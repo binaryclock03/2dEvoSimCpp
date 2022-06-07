@@ -64,6 +64,12 @@ void NeuralNet::buildNet(Genome genome)
 
 void NeuralNet::optimize()
 {
+    int max = 1;
+    for (auto neuron : this->neurons)
+        if (neuron->getDepth() > max)
+            max = neuron->getDepth();
+    this->maxDepth = max;
+
     this->checkPaths();
 }
 
@@ -111,7 +117,7 @@ forward_list<Gene> NeuralNet::getGenes()
 
 void NeuralNet::setDireciton(int dir)
 {
-    this->direction = dir;
+    this->direction = clamp(dir, 0, 8);
 }
 
 void NeuralNet::setDireciton(int x, int y)
