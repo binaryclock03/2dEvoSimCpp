@@ -80,6 +80,9 @@ int Simulation::getCreatureY(int id)
 
 void Simulation::setCreaturePos(int id, int pos)
 {
+    //cout << id << endl;
+    //cout << this->getCreaturePos(id) << " ";
+    cout << this->PosId.count(pos) << endl;
     if (this->PosId.count(pos) == 0)
     {
         int beforePos = this->IdPos[id];
@@ -87,6 +90,7 @@ void Simulation::setCreaturePos(int id, int pos)
         this->PosId.insert({ pos, id });
         this->IdPos[id] = pos;
     }
+    //cout << this->getCreaturePos(id) << endl;
 }
 
 void Simulation::moveCreature(int id, int x, int y)
