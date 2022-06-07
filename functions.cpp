@@ -59,16 +59,32 @@ float age(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 void moveX(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
     //cout << "IM MOVING X " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
-    if (neuron->getValue() > 0) simulation->moveCreature(brain->getId(), 1, 0);
-    else simulation->moveCreature(brain->getId(), -1, 0);
+    if (neuron->getValue() > 0)
+    {
+        simulation->moveCreature(brain->getId(), 1, 0);
+        brain->setDireciton(3);
+    }
+    else
+    {
+        simulation->moveCreature(brain->getId(), -1, 0);
+        brain->setDireciton(7);
+    }
     //cout << "IVE MOVED X " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
 }
 
 void moveY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
     //cout << "IM MOVING Y " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
-    if (neuron->getValue() > 0) simulation->moveCreature(brain->getId(), 0, 1);
-    else simulation->moveCreature(brain->getId(), 0, -1);
+    if (neuron->getValue() > 0)
+    {
+        simulation->moveCreature(brain->getId(), 0, 1);
+        brain->setDireciton(1);
+    }
+    else
+    {
+        simulation->moveCreature(brain->getId(), 0, -1);
+        brain->setDireciton(5);
+    }
     //cout << "IVE MOVED Y " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
 }
 
@@ -78,6 +94,7 @@ void moveRand(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
     int x = randInt(-1, 1);
     int y = randInt(-1, 1);
     simulation->moveCreature(brain->getId(), x, y);
+    brain->setDireciton(x, y);
     //cout << "IM MOVING RAND " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
 }
 
