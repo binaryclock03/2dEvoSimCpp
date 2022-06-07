@@ -28,6 +28,7 @@ protected:
     unordered_map<int, int> neuronIdIndexMap;
     int maxDepth;
     int id;
+    int direction;
 public:
     NeuralNet();
     NeuralNet(int id);
@@ -41,6 +42,9 @@ public:
 
     forward_list<Gene> getGenes();
 
+    void setDireciton(int dir);
+    void setDireciton(int x, int y);
+    int getDirection();
     int getId();
 private:
     set<int> checkPath(int nodeAdr, int depth, set<int> validatedNodesInPath, set<int>& validatedNodes);

@@ -4,12 +4,14 @@ NeuralNet::NeuralNet()
 {
     this->maxDepth = 1;
     this->id = 0;
+    this->direction = 0;
 }
 
 NeuralNet::NeuralNet(int id)
 {
     this->maxDepth = 1;
     this->id = id;
+    this->direction = 0;
 }
 
 void NeuralNet::buildNet(Genome genome)
@@ -105,6 +107,16 @@ void NeuralNet::insertNeuron(int index, shared_ptr<Neuron> neuron)
 forward_list<Gene> NeuralNet::getGenes()
 {
     return this->genes;
+}
+
+void NeuralNet::setDireciton(int dir)
+{
+    this->direction = dir;
+}
+
+void NeuralNet::setDireciton(int x, int y)
+{
+    //does not work
 }
 
 int NeuralNet::getId()

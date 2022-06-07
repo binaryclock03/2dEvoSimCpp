@@ -7,6 +7,7 @@ Simulation::Simulation()
     this->gridBounds[0] = 128;
     this->gridBounds[1] = 128;
     this->tick = 0;
+    this->maxTick = 0;
 };
 
 void Simulation::simulate()
@@ -79,10 +80,13 @@ int Simulation::getCreatureY(int id)
 
 void Simulation::setCreaturePos(int id, int pos)
 {
-    int beforePos = this->IdPos[id];
-    this->PosId.erase(beforePos);
-    this->PosId.insert({pos, id});
-    this->IdPos[id] = pos;
+    if (this->PosId.count(pos) == 0)
+    {
+        int beforePos = this->IdPos[id];
+        this->PosId.erase(beforePos);
+        this->PosId.insert({ pos, id });
+        this->IdPos[id] = pos;
+    }
 }
 
 void Simulation::moveCreature(int id, int x, int y)
