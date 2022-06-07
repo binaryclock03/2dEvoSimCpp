@@ -1,6 +1,8 @@
 #pragma once
+#include <iostream>
 #include "netObjects/Neuron.h"
 #include "netObjects/NeuralNet.h"
+#include "simulation.h"
 
 typedef float (*senFunc)(Neuron*, NeuralNet*, Simulation*);
 typedef void (*actFunc)(Neuron*, NeuralNet*, Simulation*);

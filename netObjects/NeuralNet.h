@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include "Neuron.h"
 #include "SensorNeuron.h"
 #include "InterNeuron.h"
@@ -26,8 +27,10 @@ protected:
     forward_list<Gene> genes;
     unordered_map<int, int> neuronIdIndexMap;
     int maxDepth;
+    int id;
 public:
     NeuralNet();
+    NeuralNet(int id);
 
     void buildNet(Genome genome);
     void addNeuronFunctions();

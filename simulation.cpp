@@ -39,7 +39,7 @@ void Simulation::buildFromPop(Population population)
         this->PosId.insert({pos, i});
         this->IdPos.insert({i, pos});
 
-        NeuralNet creature = NeuralNet();
+        NeuralNet creature = NeuralNet(i);
         creature.buildNet(population.getGenome(i));
         creature.addNeuronFunctions();
         this->creatures.push_back(creature);

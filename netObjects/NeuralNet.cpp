@@ -1,9 +1,15 @@
 #include "NeuralNet.h"
-#include <memory>
 
 NeuralNet::NeuralNet() 
 {
     this->maxDepth = 1;
+    this->id = 0;
+}
+
+NeuralNet::NeuralNet(int id)
+{
+    this->maxDepth = 1;
+    this->id = id;
 }
 
 void NeuralNet::buildNet(Genome genome)
@@ -53,7 +59,7 @@ void NeuralNet::buildNet(Genome genome)
 
 void NeuralNet::optimize()
 {
-    //LMAO KING DO SOMETHING
+    this->checkPaths();
 }
 
 void NeuralNet::activate(Simulation *simulation)
@@ -63,19 +69,21 @@ void NeuralNet::activate(Simulation *simulation)
         neuron->activate(0, this, simulation);
     }
 
-    for (Gene gene : this->genes)
+    for (int i = 0; i < this->maxDepth; i++)
     {
-        float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
-        float value = neurons[this->neuronIdIndexMap[gene.inAdr]]->getValue();
-        value = value * strength;
-        neurons[this->neuronIdIndexMap[gene.outAdr]]->setValue(value);
-    }
+        for (Gene gene : this->genes)
+        {
+            float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
+            float value = neurons[this->neuronIdIndexMap[gene.inAdr]]->getValue();
+            value = value * strength;
+            neurons[this->neuronIdIndexMap[gene.outAdr]]->setValue(value);
+        }
 
-    for (auto neuron : this->neurons)
-    {
-        neuron->activate(1, this, simulation);
+        for (auto neuron : this->neurons)
+        {
+            neuron->activate(1, this, simulation);
+        }
     }
-
     for (auto neuron : this->neurons)
     {
         neuron->activate(2, this, simulation);

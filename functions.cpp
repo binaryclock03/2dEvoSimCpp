@@ -1,5 +1,4 @@
 #include "functions.h"
-#include <iostream>
 
 NeuronFunctions::NeuronFunctions()
 {
@@ -51,20 +50,24 @@ float posY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 //actions
 void moveX(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-
+    if (neuron->getValue() > 0) simulation->moveCreature(1, 1, 0);
+    else simulation->moveCreature(1, -1, 0);
 }
 
 void moveY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-
+    if (neuron->getValue() > 0) simulation->moveCreature(1, 0, 1);
+    else simulation->moveCreature(1, 0, -1);
 }
 
 void moveRand(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-
+    int x = randInt(-1, 1);
+    int y = randInt(-1, 1);
+    simulation->moveCreature(1, x, y);
 }
 
 void kill(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
-
+    cout << "NOM NOM NOM KINGS BRAINS WERE GO... THERES NOTHING HERE" << endl;
 }
