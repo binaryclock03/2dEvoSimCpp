@@ -4,6 +4,7 @@
 #include <vector>
 #include "netObjects/NeuralNet.h"
 #include "Population.h"
+#include <string>
 
 using namespace std;
 
@@ -16,12 +17,15 @@ protected:
     map<int, int> PosId;
     map<int, int> IdPos;
     vector<NeuralNet> creatures;
-
+    string name;
 public:
-    Simulation();
+    Simulation(string name);
 
     void simulate();
     void simulate(int steps);
+    void simulate(int steps, int generation);
+    void saveState(int generation);
+
     void optimize();
     void buildFromPop(Population population);
 

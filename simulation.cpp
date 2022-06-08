@@ -1,9 +1,14 @@
 #include "Simulation.h"
 #include "Population.h"
 #include "util.h"
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+#include <string>
 
-Simulation::Simulation() 
-{
+Simulation::Simulation(string name) 
+{   
+    this->name = name;
     this->gridBounds[0] = 128;
     this->gridBounds[1] = 128;
     this->tick = 0;
@@ -28,6 +33,39 @@ void Simulation::simulate(int steps)
     }
 }
 
+void Simulation::simulate(int steps, int generation)
+{
+    this->maxTick = steps;
+    for (short i = 0; i < steps; i++)
+    {
+        if (generation%10 == 0)
+        {
+            this->saveState(generation);
+        }
+        this->tick = i;
+        this->simulate();
+    }
+}
+
+void Simulation::saveState(int generation)
+{
+    string filePath = "Playbacks/" + this->name + "_" + to_string(generation) + ".csv";
+
+    std::fstream file;
+    file.open(filePath, file.app | file.out);
+
+    if (!file.is_open()) {
+        std::cout << "Failed to open file: " << filePath << std::endl;
+    }
+    else {
+        string stepStr = "";
+        for (auto pos:IdPos) {
+            stepStr = stepStr + to_string(pos.second) + ",";
+        }
+        file << stepStr << "\n";
+        file.close();
+    }
+}
 
 void Simulation::optimize()
 {

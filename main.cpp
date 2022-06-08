@@ -23,10 +23,10 @@ int main()
         std::cout << "Generation " << to_string(pop->getGeneration()) << " started." << std::endl;
         ProgressTrackerTimer t("Generation " + to_string(pop->getGeneration()),Pt);
 
-        Simulation sim = Simulation();
+        Simulation sim = Simulation(pop->name);
         sim.buildFromPop(*pop);
         sim.optimize();
-        sim.simulate(256);
+        sim.simulate(256,pop->getGeneration());
 
 
         int numberOfSurvivors;
