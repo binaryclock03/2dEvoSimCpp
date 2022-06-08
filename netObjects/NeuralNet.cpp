@@ -241,7 +241,3 @@ vector<int> NeuralNet::checkPaths() {
     }
     return activeAdrsVec;
 }
-
-void NeuralNet::addNeuronFunctions() {
-
-}
