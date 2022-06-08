@@ -27,6 +27,8 @@ float posY(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 
 float age(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 
+float getDistCreatureFwd(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
+
 //Actions
 void moveX(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 void moveY(Neuron* neuron, NeuralNet* brain, Simulation* simulation);

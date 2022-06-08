@@ -20,7 +20,7 @@ void ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulation
             this->value = tanh(incoming + incomingLast);
             break;
         case 2:
-            if (true)//random() < abs(value)
+            if (random() < abs(value))
             {
                 this->actionFunction(this, brain, simulation);
             }

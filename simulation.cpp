@@ -56,7 +56,10 @@ vector<int> Simulation::returnSurvivors()
     vector<int> survivors;
     for (int i = 0; i < creatures.size(); i++)
     {
-        if (this->getCreatureY(i) > ((int) this->gridBounds[1]/2))
+        int x = this->getCreatureX(i);
+        int y = this->getCreatureY(i);
+
+        if (y > ((int) this->gridBounds[1]/4) && y < ((int)this->gridBounds[1]*3 / 4) && x >((int)this->gridBounds[0] / 4) && x < ((int)this->gridBounds[0] * 3 / 4))
             survivors.push_back(i);
     }
     return survivors;

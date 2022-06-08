@@ -53,6 +53,12 @@ float age(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
     return scale(simulation->getSimTick(), 0, simulation->getMaxSimTick(), 0, 1);
 }
 
+float getDistCreatureFwd(Neuron* neuron, NeuralNet* brain, Simulation* simulation) 
+{
+    int dir = brain->getDirection();
+    return 0.0f;
+}
+
 
 
 //actions
