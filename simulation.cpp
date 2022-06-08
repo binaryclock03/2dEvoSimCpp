@@ -85,7 +85,6 @@ void Simulation::buildFromPop(Population population)
 
         NeuralNet creature = NeuralNet(i);
         creature.buildNet(population.getGenome(i));
-        creature.addNeuronFunctions();
         this->creatures.push_back(creature);
     }
 }

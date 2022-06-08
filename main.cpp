@@ -14,7 +14,7 @@ int main()
     ProgressTracker Pt = ProgressTracker(mutationRate, populationSize, true);
     
     Population *pop = new Population();
-    pop->generateGenomes(populationSize, 6, 7, 3, 2);
+    pop->generateGenomes(populationSize, 6, funcs.sensorFuncs.size(), 3, 2);
     pop->saveGeneration();
 
     

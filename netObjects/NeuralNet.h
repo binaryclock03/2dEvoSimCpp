@@ -34,7 +34,6 @@ public:
     NeuralNet(int id);
 
     void buildNet(Genome genome);
-    void addNeuronFunctions();
     void insertNeuron(int index, shared_ptr<Neuron> neuron);
     void optimize();
     void activate(Simulation *simulation);
