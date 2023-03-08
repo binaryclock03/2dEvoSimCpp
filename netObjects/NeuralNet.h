@@ -41,9 +41,11 @@ public:
 
     forward_list<Gene> getGenes();
 
-    void setDireciton(int dir);
-    void setDireciton(int x, int y);
+    void setDirection(int dir);
+    void setDirection(int x, int y);
     int getDirection();
+    int getDirectionX();
+    int getDirectionY();
     int getId();
 private:
     set<int> checkPath(int nodeAdr, int depth, set<int> validatedNodesInPath, set<int>& validatedNodes);

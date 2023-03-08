@@ -21,7 +21,7 @@ public:
     Neuron(int address);
     ~Neuron();
 
-    virtual void activate(int action, NeuralNet* brain, Simulation *simulation) = 0;
+    virtual float activate(int action, NeuralNet* brain, Simulation *simulation) = 0;
 
     int getAddress() { return this->address; }
     void setAddress(int address) { this->address = address; }

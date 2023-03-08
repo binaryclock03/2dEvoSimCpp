@@ -30,8 +30,12 @@ float age(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 float getDistCreatureFwd(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 
 //Actions
+void doNothing(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 void moveX(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 void moveY(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
 void moveRand(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
+void moveFB(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
+void moveRL(Neuron* neuron, NeuralNet* brain, Simulation* simulation);
+
 
 void kill(Neuron* neuron, NeuralNet* brain, Simulation* simulation);

@@ -58,6 +58,7 @@ void Population::saveGeneration() {
 
     if (!file.is_open()) {
         std::cout << "Failed to open file: " << filePath << std::endl;
+
     } else {
         string generationStr = "";
         for (int i = 0; i < this->numberOfGenomes; i++) {

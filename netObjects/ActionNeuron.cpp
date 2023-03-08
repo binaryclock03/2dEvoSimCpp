@@ -13,20 +13,21 @@ ActionNeuron::ActionNeuron(int address, void (*func)(Neuron*, NeuralNet*, Simula
     this->depth = 0;
 };
 
-void ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulation)
+float ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulation)
 {
     switch(action) {
         case 1:
             this->value = tanh(incoming + incomingLast);
-            break;
+            return 0.;
+
         case 2:
-            if (random() < abs(value))
-            {
-                this->actionFunction(this, brain, simulation);
-            }
             this->incomingLast = this->incomingNext;
             this->incomingNext = 0;
-            break;
+            return 0.;
+
+        case 3:
+            this->actionFunction(this, brain, simulation);
+            return 0.;
     }
 };
 

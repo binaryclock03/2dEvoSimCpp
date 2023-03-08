@@ -10,5 +10,5 @@ protected:
     void (*actionFunction)(Neuron*, NeuralNet*, Simulation*);
 public:
     ActionNeuron(int address, void(*func)(Neuron*, NeuralNet*, Simulation*));
-    void activate(int action, NeuralNet* brain, Simulation* simulation);
+    float activate(int action, NeuralNet* brain, Simulation* simulation);
 };

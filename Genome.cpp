@@ -11,7 +11,9 @@ Gene::Gene(unsigned char inAdr,unsigned char outAdr, unsigned short strength) {
 }
 
 Gene::Gene() {
-
+    this->inAdr = 0;
+    this->outAdr = 0;
+    this->strength = 0;
 }
 
 string Gene::toString() 
@@ -26,7 +28,10 @@ string Gene::toString()
 }
 
 Genome::Genome() {
-
+    this->numberOfGenes = 0;
+    this->maxInIndex = 0;
+    this->maxOutIndex = 0;
+    this->maxInterIndex = 0;
 }
 
 
