@@ -28,3 +28,6 @@ struct Timer
 float clamp(float num, float minValue, float maxValue);
 
 float scale(float num, float inMin, float inMax, float outMin, float outMax);
+
+int dirX(int dir);
+int dirY(int dir);

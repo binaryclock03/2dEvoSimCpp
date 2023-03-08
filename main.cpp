@@ -10,16 +10,19 @@ int main()
 {
     float mutationRate = 0.01f;
     int populationSize = 1000;
+    float grade = 0.0f;
 
     ProgressTracker Pt = ProgressTracker(mutationRate, populationSize, true);
     
     Population *pop = new Population();
-    pop->generateGenomes(populationSize, 6, funcs.sensorFuncs.size(), 3, 2);
+    pop->generateGenomes(populationSize, 16, funcs.sensorFuncs.size(), funcs.actionFuncs.size(), 4);
     pop->saveGeneration();
 
     
     while(!Pt.targetReached) 
     {   
+        
+
         std::cout << "Generation " << to_string(pop->getGeneration()) << " started." << std::endl;
         ProgressTrackerTimer t("Generation " + to_string(pop->getGeneration()),Pt);
 
@@ -35,7 +38,14 @@ int main()
         
         Pt.logSurvivorCount(numberOfSurvivors,pop->getGeneration());
 
+        grade = static_cast<float>(numberOfSurvivors) / static_cast<float>(Pt.targetSurvivors);
+
+        mutationRate = (1 - pow(grade, 2)) / 25;
+
         pop->nextGeneration(mutationRate,sim.returnSurvivors());
+
+        //std:cout << "Grade: " << to_string(grade) << " Mutation Rate: " << to_string(mutationRate) << std::endl;
+        
     }
     std::cin.get();
 }

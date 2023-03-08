@@ -33,7 +33,7 @@ void NeuralNet::buildNet(Genome genome)
     
     for (int i : usedAdr)
     {
-        switch ((int)(i / 128))
+        switch ((int)std::floor(i / 128))
         {
         case 0:
         {
@@ -98,10 +98,21 @@ void NeuralNet::activate(Simulation *simulation)
             neuron->activate(1, this, simulation);
         }
     }
-    for (auto neuron : this->neurons)
+
+    float neuronReturn[sizeof(this->neurons)];
+    float maxValue = 0;
+    int maxValueIndex = 0;
+    for (int i = 0; i < neurons.size(); ++i)
     {
-        neuron->activate(2, this, simulation);
+        neuronReturn[i] = this->neurons[i]->activate(2, this, simulation);
+        if (neuronReturn[i] > maxValue)
+        {
+            maxValue = neuronReturn[i];
+            maxValueIndex = i;
+        }
     };
+
+    this->neurons[maxValueIndex]->activate(3, this, simulation);
 };
 
 void NeuralNet::insertNeuron(int index, shared_ptr<Neuron> neuron)
@@ -115,12 +126,12 @@ forward_list<Gene> NeuralNet::getGenes()
     return this->genes;
 }
 
-void NeuralNet::setDireciton(int dir)
+void NeuralNet::setDirection(int dir)
 {
     this->direction = clamp(dir, 0, 8);
 }
 
-void NeuralNet::setDireciton(int x, int y)
+void NeuralNet::setDirection(int x, int y)
 {
     if (x == 0 && y == 0)
         this->direction = 0;
@@ -153,6 +164,20 @@ void NeuralNet::setDireciton(int x, int y)
 int NeuralNet::getDirection()
 {
     return this->direction;
+}
+
+int NeuralNet::getDirectionX()
+{
+    if (this->direction == 2 || this->direction == 3 || this->direction == 4) { return 1; }
+    else if (this->direction == 6 || this->direction == 7 || this->direction == 8) { return -1; }
+    else { return 0; }
+}
+
+int NeuralNet::getDirectionY()
+{
+    if (this->direction == 1 || this->direction == 2 || this->direction == 8) { return 1; }
+    else if (this->direction == 4 || this->direction == 5 || this->direction == 6) { return -1; }
+    else { return 0; }
 }
 
 int NeuralNet::getId()

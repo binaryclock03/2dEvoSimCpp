@@ -81,3 +81,15 @@ float clamp(float num, float minValue, float maxValue) {
 float scale(float x, float inMin, float inMax, float outMin, float outMax) {
     return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
+
+int dirX(int dir) {
+    if (dir == 2 || dir == 3 || dir == 4) { return 1; }
+    else if (dir == 6 || dir == 7 || dir == 8) { return -1; }
+    else { return 0; }
+}
+
+int dirY(int dir) {
+    if (dir == 1 || dir == 2 || dir == 8) { return 1; }
+    else if (dir == 4 || dir == 5 || dir == 6) { return -1; }
+    else { return 0; }
+}

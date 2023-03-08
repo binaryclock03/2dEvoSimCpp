@@ -6,7 +6,7 @@
 using namespace std;
 
 class Population {
-    public:
+public:
     Population();
     Population(string name);
     void generateGenomes(int numberOfGenomes,int genesPerGenome,int maxInIndex,int maxOutIndex,int maxInterIndex);
@@ -18,8 +18,8 @@ class Population {
     void reproduce(float mutationRate);
     void nextGeneration(float mutationRate, vector<int> nonSurvivors);
     string name;
-    private:
     
+private: 
     int numberOfGenomes;
     int genesPerGenome;
     int maxInIndex;

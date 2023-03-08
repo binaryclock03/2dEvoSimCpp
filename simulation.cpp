@@ -28,6 +28,20 @@ void Simulation::simulate(int steps)
     this->maxTick = steps;
     for (short i = 0; i < steps; i++)
     {
+        if (i == 128)
+        {
+            for (int i = 0; i < creatures.size(); i++)
+            {
+                int x = this->getCreatureX(i);
+                int y = this->getCreatureY(i);
+
+                if (x > ((int)this->gridBounds[0] / 2))
+                {
+                    std::cout << "deleted creature" << std::endl;
+                    //this->creatures.erase(std::next(creatures.begin(), i-1));
+                }
+            }
+        }
         this->tick = i;
         this->simulate();
     }
@@ -38,9 +52,23 @@ void Simulation::simulate(int steps, int generation)
     this->maxTick = steps;
     for (short i = 0; i < steps; i++)
     {
-        if (generation%10 == 0)
+        if (generation%250 == 0)
         {
             this->saveState(generation);
+        }
+        if (i == 127)
+        {
+            for (int i = 0; i < this->creatures.size(); i++)
+            {
+                int x = this->getCreatureX(i);
+                int y = this->getCreatureY(i);
+
+                if (x > ((int)this->gridBounds[0] / 2))
+                {
+                    //this->creatures.erase(creatures.begin() + i);
+                    //this->setCreaturePos(i, 50000);
+                }
+            }
         }
         this->tick = i;
         this->simulate();
@@ -97,7 +125,7 @@ vector<int> Simulation::returnSurvivors()
         int x = this->getCreatureX(i);
         int y = this->getCreatureY(i);
 
-        if (y > ((int) this->gridBounds[1]/4) && y < ((int)this->gridBounds[1]*3 / 4) && x >((int)this->gridBounds[0] / 4) && x < ((int)this->gridBounds[0] * 3 / 4))
+        if ((y < ((int) this->gridBounds[0]/4)) && (x < ((int)this->gridBounds[1] / 4)))
             survivors.push_back(i);
     }
     return survivors;
