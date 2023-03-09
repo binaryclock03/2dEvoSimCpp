@@ -105,7 +105,7 @@ void moveY(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 void moveRand(Neuron* neuron, NeuralNet* brain, Simulation* simulation)
 {
     //cout << "IM MOVING RAND " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;
-    int dir = randInt(1, 8);
+    int dir = randInt(1, 9);
     simulation->moveCreature(brain->getId(), dirX(dir), dirY(dir));
     brain->setDirection(dir);
     //cout << "IM MOVING RAND " << simulation->getCreatureX(brain->getId()) << "," << simulation->getCreatureY(brain->getId()) << endl;

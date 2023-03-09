@@ -154,8 +154,6 @@ void Population::reproduceSex(float mutationRate, vector<int> survivors) {
     vector<Genome> children;
     children.reserve(numberOfSurvivors);
 
-    //Create Children --- mutation rate not implemented
-
     for (int i = 0; i < numberOfSurvivors/2 - numberOfSurvivors%2; i++) {
         
         if (i >= 250) {
@@ -166,7 +164,7 @@ void Population::reproduceSex(float mutationRate, vector<int> survivors) {
             Gene childGenes[64];
             for (int k = 0; k < this->genesPerGenome; k++) {
 
-                if (randInt(0, 1)) {
+                if (randInt(0, 2)) {
                     childGenes[k] = this->genomes[survivors[i]].getGene(k);
                 }
                 else {
