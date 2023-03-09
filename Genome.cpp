@@ -108,7 +108,7 @@ void Genome::mutateGene(int indexOfGene) {
         }
     }
 
-    int toChange = randInt(0,2);
+    int toChange = randInt(0,3);
 
     if (toChange == 0) {
         unsigned char newInAdr = possibleInAdrs[randInt(0,this->maxInIndex+this->maxInterIndex)];
