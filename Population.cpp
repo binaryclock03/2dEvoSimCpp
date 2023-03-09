@@ -174,10 +174,10 @@ void Population::reproduceSex(float mutationRate, vector<int> survivors) {
                 }
             }
             Genome child = Genome(childGenes, this->genesPerGenome, this->maxInIndex, this->maxOutIndex, this->maxInterIndex);
+            child.mutate(mutationRate);
             this->genomes.push_back(child);
         }
     }
-
 }
 
 void Population::nextGeneration(float mutationRate, vector<int> survivors) {
@@ -202,5 +202,8 @@ void Population::nextGeneration(float mutationRate, vector<int> survivors) {
     this->genomes = newGenomes;
     this->reproduceSex(mutationRate, survivors);
     this->reproduce(mutationRate);
-    this->saveGeneration();
+    if (this->generation % 25) {
+        this->saveGeneration();
+    }
+
 }
