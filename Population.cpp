@@ -134,6 +134,52 @@ void Population::reproduce(float mutationRate) {
     }
 }
 
+void Population::reproduceSex(float mutationRate, vector<int> survivors) {
+    
+    //Each survivor reproduces with another survivor, extras are removed, if there are not enough the space is filled w/ reproduce
+    //Each mating pair creates 2 offspring
+    //Offspring will contain a mix of genes from each parent and a random number of mutated genes (follows mutation rate
+
+    //Cylce through each pair and mix their genes, apply mutations
+    //If the end of the vector is reacher deleted the last one if it is the odd on out
+
+    //Fill empty space with new genomes, clone from existing or other?
+    //Apply changes to genomes
+
+    
+
+    int numberOfSurvivors = survivors.size();
+    int childrenPerPair = 2;
+
+    vector<Genome> children;
+    children.reserve(numberOfSurvivors);
+
+    //Create Children --- mutation rate not implemented
+
+    for (int i = 0; i < numberOfSurvivors/2 - numberOfSurvivors%2; i++) {
+        
+        if (i >= 250) {
+            break;
+        }
+
+        for (int j = 0; j < childrenPerPair; j++) {
+            Gene childGenes[64];
+            for (int k = 0; k < this->genesPerGenome; k++) {
+
+                if (randInt(0, 1)) {
+                    childGenes[k] = this->genomes[survivors[i]].getGene(k);
+                }
+                else {
+                    childGenes[k] = this->genomes[survivors[i + numberOfSurvivors / 2]].getGene(k);
+                }
+            }
+            Genome child = Genome(childGenes, this->genesPerGenome, this->maxInIndex, this->maxOutIndex, this->maxInterIndex);
+            this->genomes.push_back(child);
+        }
+    }
+
+}
+
 void Population::nextGeneration(float mutationRate, vector<int> survivors) {
     this->generation++;
 
@@ -154,6 +200,7 @@ void Population::nextGeneration(float mutationRate, vector<int> survivors) {
     }
 
     this->genomes = newGenomes;
+    this->reproduceSex(mutationRate, survivors);
     this->reproduce(mutationRate);
     this->saveGeneration();
 }

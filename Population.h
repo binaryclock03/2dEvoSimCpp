@@ -16,6 +16,7 @@ public:
     int getGeneration() {return this->generation;};
     int getNumberOfGenomes() {return this->numberOfGenomes;};
     void reproduce(float mutationRate);
+    void reproduceSex(float mutationRate, vector<int> Survivors);
     void nextGeneration(float mutationRate, vector<int> nonSurvivors);
     string name;
     
