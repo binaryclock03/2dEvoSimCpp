@@ -77,7 +77,7 @@ void Simulation::simulate(int steps, int generation)
 
 void Simulation::saveState(int generation)
 {
-    string filePath = "Playbacks/" + this->name + "_" + to_string(generation) + ".csv";
+    string filePath = "../Playbacks/" + this->name + "_" + to_string(generation) + ".csv";
 
     std::fstream file;
     file.open(filePath, file.app | file.out);
