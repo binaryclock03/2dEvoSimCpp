@@ -34,11 +34,11 @@
 *.json
 *.csv
 
-/.vscode
-.vscode/tasks.json
-.vscode/c_cpp_properties.json
-/Debug
-/.vs/2dEvoSimCpp/v16
-/x64
-/.vs/slnx.sqlite
-/.vs
+Simulator/.vscode
+Simulator/vscode/tasks.json
+Simulator/vscode/c_cpp_properties.json
+Simulator/Debug
+Simulator/.vs/2dEvoSimCpp/v16
+Simulator/x64
+Simulator/.vs/slnx.sqlite
+Simulator/.vs
