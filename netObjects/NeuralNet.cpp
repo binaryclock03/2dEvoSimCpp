@@ -99,20 +99,15 @@ void NeuralNet::activate(Simulation *simulation)
         }
     }
 
-    float neuronReturn[sizeof(this->neurons)];
-    float maxValue = 0;
-    int maxValueIndex = 0;
-    for (int i = 0; i < neurons.size(); ++i)
+    for (auto neuron : this->neurons)
     {
-        neuronReturn[i] = this->neurons[i]->activate(2, this, simulation);
-        if (neuronReturn[i] > maxValue)
-        {
-            maxValue = neuronReturn[i];
-            maxValueIndex = i;
-        }
-    };
+        neuron->activate(2, this, simulation);
+    }
 
-    this->neurons[maxValueIndex]->activate(3, this, simulation);
+    for (auto neuron : this->neurons)
+    {
+        neuron->activate(3, this, simulation);
+    }
 };
 
 void NeuralNet::insertNeuron(int index, shared_ptr<Neuron> neuron)

@@ -23,10 +23,12 @@ float ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulatio
         case 2:
             this->incomingLast = this->incomingNext;
             this->incomingNext = 0;
-            return 0.;
+            return this->value;
 
         case 3:
-            this->actionFunction(this, brain, simulation);
+            if (this->value < random()) {
+                this->actionFunction(this, brain, simulation);
+            }
             return 0.;
     }
 };
