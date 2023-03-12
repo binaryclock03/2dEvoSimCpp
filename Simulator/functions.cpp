@@ -8,9 +8,9 @@ NeuronFunctions::NeuronFunctions()
     this->sensorFuncs.push_back(centerBiasY);
     this->sensorFuncs.push_back(posX);
     this->sensorFuncs.push_back(posY);
-    this->sensorFuncs.push_back(age);
+    //this->sensorFuncs.push_back(age);
 
-    this->actionFuncs.push_back(doNothing);
+    //this->actionFuncs.push_back(doNothing);
     this->actionFuncs.push_back(moveX);
     this->actionFuncs.push_back(moveY);
     this->actionFuncs.push_back(moveRand);
