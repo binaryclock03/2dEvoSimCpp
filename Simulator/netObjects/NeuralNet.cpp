@@ -87,8 +87,8 @@ void NeuralNet::activate(Simulation *simulation)
             float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
             float value = this->neurons[this->neuronIdIndexMap[gene.inAdr]]->getValue();
             value = value * strength;
-            if (gene.outAdr > 255)
-                this->neurons[this->neuronIdIndexMap[gene.outAdr+256]]->addIncoming(value);
+            if (gene.outAdr > 127)
+                this->neurons[this->neuronIdIndexMap[gene.outAdr+128]]->addIncoming(value);
             else
                 this->neurons[this->neuronIdIndexMap[gene.outAdr]]->addIncoming(value);
         }
