@@ -10,6 +10,7 @@ private:
 	int maxQueueLen;
 
 public:
+	Random();
 	Random(int queue_len);
 
 	float getRandomFloat();

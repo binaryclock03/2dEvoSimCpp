@@ -1,6 +1,11 @@
 #include "Random.h"
 #include "util.h"
 
+Random::Random()
+{
+	this->maxQueueLen = 1000;
+}
+
 Random::Random(int maxQueueLen)
 {
 	this->maxQueueLen = maxQueueLen;

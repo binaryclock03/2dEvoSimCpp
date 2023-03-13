@@ -9,15 +9,13 @@ InterNeuron::InterNeuron(int address)
     this->depth = 0;
 }
 
-float InterNeuron::activate(int action, NeuralNet* brain, Simulation *simulation)
+void InterNeuron::activate(int action, NeuralNet* brain, Simulation *simulation)
 {
     switch(action) {
         case 1:
             this->value = tanh(incoming + incomingLast);
-            return this->value;
         case 2:
             this->incomingLast = this->incomingNext;
             this->incomingNext = 0;
-            return 0.;
     }
 };

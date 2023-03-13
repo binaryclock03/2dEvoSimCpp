@@ -5,6 +5,7 @@
 #include <iostream>
 #include <filesystem>
 #include <string>
+#include <future>
 
 Simulation::Simulation(string name) 
 {   
@@ -13,6 +14,7 @@ Simulation::Simulation(string name)
     this->gridBounds[1] = 128;
     this->tick = 0;
     this->maxTick = 0;
+    this->random = Random(100000);
 };
 
 void Simulation::simulate()
@@ -25,27 +27,20 @@ void Simulation::simulate()
 
 void Simulation::simulate(int steps, int generation)
 {
+    //Loop through sim steps till max sim step
     this->maxTick = steps;
     for (short i = 0; i < steps; i++)
     {
+        //running the regeneration of random numbers asyncly
+        std::async(&Random::regenerate, &this->random);
+
+        //saving the generation if its a multiple of 250
         if (generation%250 == 0)
         {
             this->saveState(generation);
         }
-        if (i == 127)
-        {
-            for (int i = 0; i < this->creatures.size(); i++)
-            {
-                int x = this->getCreatureX(i);
-                int y = this->getCreatureY(i);
-
-                if (x > ((int)this->gridBounds[0] / 2))
-                {
-                    //this->creatures.erase(creatures.begin() + i);
-                    //this->setCreaturePos(i, 50000);
-                }
-            }
-        }
+        
+        //sets sim tick and simulates
         this->tick = i;
         this->simulate();
     }
