@@ -14,8 +14,8 @@ protected:
     short gridBounds[2];
     short tick;
     short maxTick;
-    map<int, int> PosId;
-    map<int, int> IdPos;
+    unordered_map<int, int> PosId;
+    unordered_map<int, int> IdPos;
     vector<NeuralNet> creatures;
     string name;
 public:
