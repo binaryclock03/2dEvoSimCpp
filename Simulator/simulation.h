@@ -22,7 +22,6 @@ public:
     Simulation(string name);
 
     void simulate();
-    void simulate(int steps);
     void simulate(int steps, int generation);
     void saveState(int generation);
 

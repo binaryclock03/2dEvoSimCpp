@@ -23,30 +23,6 @@ void Simulation::simulate()
     }
 }
 
-void Simulation::simulate(int steps)
-{
-    this->maxTick = steps;
-    for (short i = 0; i < steps; i++)
-    {
-        if (i == 128)
-        {
-            for (int i = 0; i < creatures.size(); i++)
-            {
-                int x = this->getCreatureX(i);
-                int y = this->getCreatureY(i);
-
-                if (x > ((int)this->gridBounds[0] / 2))
-                {
-                    std::cout << "deleted creature" << std::endl;
-                    //this->creatures.erase(std::next(creatures.begin(), i-1));
-                }
-            }
-        }
-        this->tick = i;
-        this->simulate();
-    }
-}
-
 void Simulation::simulate(int steps, int generation)
 {
     this->maxTick = steps;
