@@ -1,30 +1,40 @@
 #include "Random.h"
+#include "util.h"
+
+Random::Random(int maxQueueLen)
+{
+	this->maxQueueLen = maxQueueLen;
+}
 
 float Random::getRandomFloat()
 {
-	return 0.0f;
+	float numb = this->randos.front();
+	this->randos.pop();
+	return numb;
 }
 
 float Random::getRandomFloat(float min, float max)
 {
-	return 0.0f;
-}
-
-int Random::getRandomInt()
-{
-	return 0;
+	float numb = this->getRandomFloat();
+	float scale = (max - min);
+	return (numb * scale) + min;
 }
 
 int Random::getRandomInt(int min, int max)
 {
-	return 0;
+	return (int)this->getRandomFloat(min, max);
 }
 
 bool Random::getRandomBool()
 {
-	return false;
+	return (this->getRandomFloat() > 0.5);
 }
 
 void Random::regenerate()
 {
+	int queue_len = randos.size();
+	for (int i = 0; i < this->maxQueueLen - queue_len; i++)
+	{
+		this->randos.push(random());
+	}
 }
