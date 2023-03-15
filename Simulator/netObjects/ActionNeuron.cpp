@@ -17,7 +17,7 @@ float ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulatio
 {
     switch(action) {
         case 1:
-            this->value = tanh(incoming + incomingLast);
+            this->value = tanh(this->incoming + this->incomingLast);
             return 0.;
 
         case 2:

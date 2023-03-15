@@ -37,7 +37,7 @@ public:
     void insertNeuron(int index, shared_ptr<Neuron> neuron);
     void optimize();
     void activate(Simulation *simulation);
-    vector<int> checkPaths();
+    unordered_set<int> checkPaths();
 
     forward_list<Gene> getGenes();
 

@@ -16,7 +16,8 @@ NeuralNet::NeuralNet(int id)
 
 void NeuralNet::buildNet(Genome genome)
 {
-    unordered_set<int> usedAdr;
+    unordered_set<int> usedAdr; 
+    
 
     for (int i = 0; i < genome.getNumberOfGenes(); i++)
     {
@@ -64,13 +65,27 @@ void NeuralNet::buildNet(Genome genome)
 
 void NeuralNet::optimize()
 {
-    int max = 1;
-    for (auto neuron : this->neurons)
-        if (neuron->getDepth() > max)
-            max = neuron->getDepth();
-    this->maxDepth = max;
+    
+    unordered_set<int> usedAdrs = this->checkPaths();
+    vector<shared_ptr<Neuron>> newNeurons;
+    unordered_map<int, int> newMap;
 
-    this->checkPaths();
+    int max = 1;
+    int j = 0;
+    for (int i = 0; i < this->neurons.size(); i++) {
+        auto neuron = this->neurons[i];
+        if (neuron->getDepth() > max) {
+            max = neuron->getDepth();
+        }
+        if (usedAdrs.contains(neuron->getAddress())) {
+            newNeurons.push_back(neuron);
+            newMap.insert({ neuron->getAddress(), j });
+            j++;
+        }
+    }
+    this->maxDepth = max;
+    this->neurons = newNeurons;
+    this->neuronIdIndexMap = newMap;
 }
 
 void NeuralNet::activate(Simulation *simulation)
@@ -86,11 +101,24 @@ void NeuralNet::activate(Simulation *simulation)
         {
             float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
             float value = this->neurons[this->neuronIdIndexMap[gene.inAdr]]->getValue();
+
+            int depth = this->neurons[this->neuronIdIndexMap[gene.inAdr]]->getDepth();
+
             value = value * strength;
-            if (gene.outAdr > 127)
-                this->neurons[this->neuronIdIndexMap[gene.outAdr+128]]->addIncoming(value);
-            else
-                this->neurons[this->neuronIdIndexMap[gene.outAdr]]->addIncoming(value);
+
+            if (this->neurons[this->neuronIdIndexMap[gene.outAdr]]->getDepth() < depth) {
+                if (gene.outAdr > 127)
+                    this->neurons[this->neuronIdIndexMap[gene.outAdr + 128]]->addIncomingNext(value);
+                else
+                    this->neurons[this->neuronIdIndexMap[gene.outAdr]]->addIncomingNext(value);
+            }
+            else {
+
+                if (gene.outAdr > 127)
+                    this->neurons[this->neuronIdIndexMap[gene.outAdr + 128]]->addIncoming(value);
+                else
+                    this->neurons[this->neuronIdIndexMap[gene.outAdr]]->addIncoming(value);
+            }
         }
 
         for (auto neuron : this->neurons)
@@ -239,7 +267,7 @@ set<int> NeuralNet::checkPath(int nodeAdr, int depth, set <int> validatedNodesIn
 }
 
 
-vector<int> NeuralNet::checkPaths() {
+unordered_set<int> NeuralNet::checkPaths() {
     set <int> activeAdrs;
     set <int> emptySet;
     unordered_set <int> checkedInAdrs;
@@ -253,11 +281,11 @@ vector<int> NeuralNet::checkPaths() {
           activeAdrs.merge(this->checkPath(gene.inAdr,0,emptySet,activeAdrs));
       }  
     }
-    std::vector<int> activeAdrsVec;
-    activeAdrsVec.reserve(activeAdrs.size());
+    std::unordered_set<int> activeAdrsU;
 
     for (int adr : activeAdrs) {
-        activeAdrsVec.push_back(adr);
+        activeAdrsU.insert(adr);
     }
-    return activeAdrsVec;
+
+    return activeAdrsU;
 }
