@@ -9,5 +9,5 @@ protected:
 public:
     SensorNeuron();
     SensorNeuron(int address, float (*sensorFunction)(Neuron*, NeuralNet*, Simulation*));
-    float activate(int action, NeuralNet *brain, Simulation *simulation) override;
+    void activate(int action, NeuralNet *brain, Simulation *simulation) override;
 };

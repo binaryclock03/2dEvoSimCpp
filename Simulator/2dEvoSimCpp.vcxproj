@@ -184,6 +184,7 @@
     <ClCompile Include="netobjects\SensorNeuron.cpp" />
     <ClCompile Include="Population.cpp" />
     <ClCompile Include="ProgressTracker.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="simulation.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
@@ -197,6 +198,7 @@
     <ClInclude Include="netobjects\SensorNeuron.h" />
     <ClInclude Include="Population.h" />
     <ClInclude Include="ProgressTracker.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="simulation.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="XoshiroCpp.hpp" />

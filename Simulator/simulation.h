@@ -4,6 +4,7 @@
 #include <vector>
 #include "netObjects/NeuralNet.h"
 #include "Population.h"
+#include "Random.h"
 #include <string>
 
 using namespace std;
@@ -18,7 +19,10 @@ protected:
     unordered_map<int, int> IdPos;
     vector<NeuralNet> creatures;
     string name;
+    
 public:
+    Random random;
+
     Simulation(string name);
 
     void simulate();

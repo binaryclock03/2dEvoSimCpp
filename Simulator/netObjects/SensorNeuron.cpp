@@ -24,11 +24,10 @@ SensorNeuron::SensorNeuron(int address, float (*sensorFunction)(Neuron*, NeuralN
     this->value = 0;
 };
 
-float SensorNeuron::activate(int action, NeuralNet* brain, Simulation *simulation)
+void SensorNeuron::activate(int action, NeuralNet* brain, Simulation *simulation)
 {
     switch(action) {
         case 0:
             this->value = this->sensorFunction(this, brain, simulation);
-            return 0.;
     }
 };
