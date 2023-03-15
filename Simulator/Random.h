@@ -6,12 +6,10 @@ using namespace std;
 class Random
 {
 private:
-	queue<float> randos;
-	int maxQueueLen;
+	int seed;
 
 public:
 	Random();
-	Random(int queue_len);
 
 	float getRandomFloat();
 	float getRandomFloat(float min, float max);
@@ -19,6 +17,4 @@ public:
 	int getRandomInt(int min, int max);
 
 	bool getRandomBool();
-
-	void regenerate();
 };

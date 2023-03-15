@@ -1,21 +1,23 @@
+#include <chrono>
+#include <random>
 #include "Random.h"
 #include "util.h"
+#include "XoshiroCpp.hpp"
 
 Random::Random()
 {
-	this->maxQueueLen = 1000;
-}
-
-Random::Random(int maxQueueLen)
-{
-	this->maxQueueLen = maxQueueLen;
+	this->seed = std::chrono::system_clock::now().time_since_epoch().count();
 }
 
 float Random::getRandomFloat()
 {
-	float numb = this->randos.front();
-	this->randos.pop();
-	return numb;
+
+	XoshiroCpp::Xoshiro256StarStar rng(this->seed);
+
+	std::uniform_real_distribution<float> distr(0, 1);
+
+	this->seed++;
+	return distr(rng);
 }
 
 float Random::getRandomFloat(float min, float max)
@@ -33,13 +35,4 @@ int Random::getRandomInt(int min, int max)
 bool Random::getRandomBool()
 {
 	return (this->getRandomFloat() > 0.5);
-}
-
-void Random::regenerate()
-{
-	int queue_len = randos.size();
-	for (int i = 0; i < this->maxQueueLen - queue_len; i++)
-	{
-		this->randos.push(random());
-	}
 }

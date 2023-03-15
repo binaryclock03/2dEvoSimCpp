@@ -14,7 +14,7 @@ Simulation::Simulation(string name)
     this->gridBounds[1] = 128;
     this->tick = 0;
     this->maxTick = 0;
-    this->random = Random(100000);
+    this->random = Random();
 };
 
 void Simulation::simulate()
@@ -31,8 +31,6 @@ void Simulation::simulate(int steps, int generation)
     this->maxTick = steps;
     for (short i = 0; i < steps; i++)
     {
-        //running the regeneration of random numbers asyncly
-        std::async(&Random::regenerate, &this->random);
 
         //saving the generation if its a multiple of 250
         if (generation%250 == 0)
