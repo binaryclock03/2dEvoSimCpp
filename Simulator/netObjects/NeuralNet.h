@@ -35,7 +35,6 @@ public:
 
     void buildNet(Genome genome);
     void insertNeuron(int index, shared_ptr<Neuron> neuron);
-    void remapNeurons(vector<shared_ptr<Neuron>> neurons);
     void optimize();
     void activate(Simulation *simulation);
     unordered_set<int> checkPaths();

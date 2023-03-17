@@ -117,8 +117,8 @@ void NeuralNet::activate(Simulation *simulation)
                 OutAdrC += 256;
             }
 
-            auto inNeuron = this->neurons[this->neuronIdIndexMap[gene.inAdr]];
-            auto outNeuron = this->neurons[this->neuronIdIndexMap[OutAdrC]];
+            auto& inNeuron = this->neurons[this->neuronIdIndexMap[gene.inAdr]];
+            auto& outNeuron = this->neurons[this->neuronIdIndexMap[OutAdrC]];
 
             float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
             float value = inNeuron->getValue();
