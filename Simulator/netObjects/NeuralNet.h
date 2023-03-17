@@ -24,7 +24,7 @@ class NeuralNet
 {
 protected:
     vector<shared_ptr<Neuron>> neurons;
-    forward_list<Gene> genes;
+    vector<Gene> genes;
     unordered_map<int, int> neuronIdIndexMap;
     int maxDepth;
     int id;
@@ -40,7 +40,7 @@ public:
     void activate(Simulation *simulation);
     unordered_set<int> checkPaths();
 
-    forward_list<Gene> getGenes();
+    vector<Gene> getGenes();
 
     void setDirection(int dir);
     void setDirection(int x, int y);

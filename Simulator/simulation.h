@@ -26,7 +26,7 @@ public:
     void saveState(int generation);
 
     void optimize();
-    void buildFromPop(Population population);
+    void buildFromPop(Population* population);
 
     void moveCreature(int id, int x, int y);
     void setCreaturePos(int id, int pos);

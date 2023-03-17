@@ -79,16 +79,17 @@ void Simulation::optimize()
     }
 }
 
-void Simulation::buildFromPop(Population population)
+void Simulation::buildFromPop(Population* population)
 {
-    for (int i = 0; i < population.getNumberOfGenomes(); i++)
+    this->creatures.reserve(population->getNumberOfGenomes());
+    for (int i = 0; i < population->getNumberOfGenomes(); i++)
     {
         int pos = randInt(0, this->gridBounds[0]*this->gridBounds[1]);
         this->PosId.insert({pos, i});
         this->IdPos.insert({i, pos});
 
         NeuralNet creature = NeuralNet(i);
-        creature.buildNet(population.getGenome(i));
+        creature.buildNet(population->getGenome(i));
         this->creatures.push_back(creature);
     }
 }

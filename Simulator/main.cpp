@@ -14,7 +14,7 @@ int main()
 
     ProgressTracker Pt = ProgressTracker(mutationRate, populationSize, true);
     
-    Population *pop = new Population();
+    Population* pop = new Population();
     pop->generateGenomes(populationSize, 8, funcs.sensorFuncs.size(), funcs.actionFuncs.size(), 2);
     pop->saveGeneration();
 
@@ -27,7 +27,7 @@ int main()
         ProgressTrackerTimer t("Generation " + to_string(pop->getGeneration()),Pt);
 
         Simulation sim = Simulation(pop->name);
-        sim.buildFromPop(*pop);
+        sim.buildFromPop(pop);
         sim.optimize();
         sim.simulate(256,pop->getGeneration());
 
