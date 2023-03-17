@@ -112,33 +112,26 @@ void NeuralNet::activate(Simulation *simulation)
     {
         for (Gene gene : this->genes)
         {
-
-            int corrected;
+            int OutAdrC = gene.outAdr;
             if (gene.outAdr < 127) {
-                corrected = gene.outAdr + 256;
+                OutAdrC += 256;
             }
-            else {
-                corrected = gene.outAdr;
-            }
-            float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
-            float value = this->neurons[this->neuronIdIndexMap[gene.inAdr]]->getValue();
 
-            int depth = this->neurons[this->neuronIdIndexMap[gene.inAdr]]->getDepth();
+            auto inNeuron = this->neurons[this->neuronIdIndexMap[gene.inAdr]];
+            auto outNeuron = this->neurons[this->neuronIdIndexMap[OutAdrC]];
+
+            float strength = scale(gene.strength, 0, 65535, -4.0f, 4.0f);
+            float value = inNeuron->getValue();
+
+            int depth = inNeuron->getDepth();
 
             value = value * strength;
 
-            if (this->neurons[this->neuronIdIndexMap[corrected]]->getDepth() < depth) {
-                if (gene.outAdr > 127)
-                    this->neurons[this->neuronIdIndexMap[gene.outAdr]]->addIncomingNext(value);
-                else
-                    this->neurons[this->neuronIdIndexMap[gene.outAdr+256]]->addIncomingNext(value);
+            if (outNeuron->getDepth() < depth) {
+                outNeuron->addIncomingNext(value);
             }
             else {
-
-                if (gene.outAdr > 127)
-                    this->neurons[this->neuronIdIndexMap[gene.outAdr]]->addIncoming(value);
-                else
-                    this->neurons[this->neuronIdIndexMap[gene.outAdr+256]]->addIncoming(value);
+                outNeuron->addIncoming(value);
             }
         }
 
