@@ -10,41 +10,23 @@
 using namespace std;
 
 int RNG_SEED = std::chrono::steady_clock::now().time_since_epoch().count();
+XoshiroCpp::Xoshiro256StarStar rng(RNG_SEED);
 
 int randInt( int min, int max)
  {
-    // std::random_device                  rand_dev;
-    // std::mt19937                        gen(rand_dev());
-    // std::uniform_int_distribution<>    distr(min, max-1);
-    
-    XoshiroCpp::Xoshiro256StarStar rng(RNG_SEED);
     std::uniform_int_distribution<int> distr(min, max-1);
-
-    std::uniform_int_distribution<int> seed(-2147483647-1, 2147483647);
-    RNG_SEED = seed(rng);
-
     return distr(rng);
 }
 
 float randFloat( float min, float max)
  {
-    XoshiroCpp::Xoshiro256StarStar rng(RNG_SEED);
     std::uniform_real_distribution<float> distr(min, max-1);
-
-    std::uniform_int_distribution<int> seed(-2147483647 - 1, 2147483647);
-    RNG_SEED = seed(rng);
-
     return distr(rng);
 }
 
 float random()
  {
-    XoshiroCpp::Xoshiro256StarStar rng(RNG_SEED);
     std::uniform_real_distribution<float> distr(0,1);
-    
-    std::uniform_int_distribution<int> seed(-2147483647 - 1, 2147483647);
-    RNG_SEED = seed(rng);
-
     return distr(rng);
 }
 
