@@ -165,7 +165,7 @@ vector<Gene> NeuralNet::getGenes()
 
 void NeuralNet::setDirection(int dir)
 {
-    this->direction = clamp(dir, 0, 8);
+    this->direction = clamp(dir, 1, 8);
 }
 
 void NeuralNet::setDirection(int x, int y)
