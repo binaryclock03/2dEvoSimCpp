@@ -41,7 +41,9 @@ int main()
         grade = static_cast<float>(numberOfSurvivors) / static_cast<float>(Pt.targetSurvivors);
 
         //mutationRate = (1.038 - 3.3793*grade + 3.8078*pow(grade,2) - 1.4546*pow(grade,3))*8/10 ;
-        mutationRate = 0.01;
+        mutationRate = (0.2 * exp(-4.14 * grade)) + 0.001;
+        //mutationRate = 0.01;
+        
         cout << to_string(mutationRate) << endl;
 
         pop->nextGeneration(mutationRate,sim.returnSurvivors());
