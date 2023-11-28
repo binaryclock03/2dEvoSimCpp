@@ -12,6 +12,7 @@ public:
     void generateGenomes(int numberOfGenomes,int genesPerGenome,int maxInIndex,int maxOutIndex,int maxInterIndex);
     Genome getGenome(int index);
     void saveGeneration();
+    void saveGenerationHex();
     void loadGeneration(int generation);
     int getGeneration() {return this->generation;};
     int getNumberOfGenomes() {return this->numberOfGenomes;};

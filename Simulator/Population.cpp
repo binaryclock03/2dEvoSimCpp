@@ -70,6 +70,48 @@ void Population::saveGeneration() {
         file << generationStr << "\n";
         file.close();
     }
+
+    saveGenerationHex();
+
+}
+
+void Population::saveGenerationHex() {
+    //string input = "0201aa738080d514820453fb80020cbe0583675b818494b406823e758382d60e030257f98304b56505034f2d03058dc601017ec98284dde40402ba3b82053252";
+    string filePath = "../Populations/" + this->name + ".bin";
+
+    string input = "";
+    for (int i = 0; i < this->numberOfGenomes; i++) {
+        input = input + this->genomes[i].toString();
+        if (i < this->numberOfGenomes - 1) {
+            input += "ffffffff";
+        }
+    }
+    input += "ffffffff";
+
+    //turning data into bytes
+    std::basic_string<uint8_t> bytes;
+
+    for (size_t i = 0; i < input.length(); i += 2)
+    {
+        uint16_t byte;
+
+        std::string nextbyte = input.substr(i, 2);
+        std::istringstream(nextbyte) >> std::hex >> byte;
+        bytes.push_back(static_cast<uint8_t>(byte));
+    }
+    std::string result(begin(bytes), end(bytes));
+
+    //writing to the file
+    std::ofstream output_file(filePath, std::ios::binary | std::ios::out | std::ios::app);
+    if (output_file.is_open())
+    {
+        output_file << result;
+        output_file.close();
+    }
+    else
+    {
+        std::cout << "Error could not create file." << std::endl;
+    }
 }
 
 void Population::loadGeneration(int generation) {
