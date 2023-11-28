@@ -11,32 +11,33 @@ using namespace std;
 
 Population::Population() {
     this->generation = 0;
-    char name[5] = {65,65,65,65,0};
-    bool invalid = true;
-    while (invalid) {
-        for (int i = 0; i < 4; i++) {
-            name[i] = randInt(65,91);
-        }
-        string nameStr(name);
-        string filePath = "../Populations/" + nameStr + ".csv";
-        invalid = std::filesystem::exists(filePath);
-        this->name = nameStr;
-    }
-
 }
 
-Population::Population(string name) {
-    this->generation = 0;
-    this->name = name;
-}
+//Population::Population(string name) {
+//    this->generation = 0;
+//    this->name = name;
+//}
 
 void Population::generateGenomes(int numberOfGenomes,int genesPerGenome,int maxInIndex,int maxOutIndex,int maxInterIndex) {
-    this-> numberOfGenomes = numberOfGenomes;
-    this-> genesPerGenome = genesPerGenome;
+    this->numberOfGenomes = numberOfGenomes;
+    this->genesPerGenome = genesPerGenome;
     this->maxInIndex = maxInIndex;
     this->maxOutIndex = maxOutIndex;
     this->maxInterIndex = maxInterIndex;
     
+    //file generation
+    char name[5] = { 65,65,65,65,0 };
+    bool invalid = true;
+    while (invalid) {
+        for (int i = 0; i < 4; i++) {
+            name[i] = randInt(65, 91);
+        }
+        string nameStr(name);
+        nameStr += "_p" + to_string(this->numberOfGenomes) + "g" + to_string(this->genesPerGenome);
+        string filePath = "../Populations/" + nameStr + ".csv";
+        invalid = std::filesystem::exists(filePath);
+        this->name = nameStr;
+    }
 
     for (int i = 0; i < numberOfGenomes; i++) {
         this->genomes.push_back(Genome(genesPerGenome,maxInIndex,maxOutIndex,maxInterIndex));
@@ -79,10 +80,10 @@ void Population::saveGenerationHex() {
     for (int i = 0; i < this->numberOfGenomes; i++) {
         input = input + this->genomes[i].toString();
         if (i < this->numberOfGenomes - 1) {
-            input += "ffffffff";
+            //input += "ffffffff";
         }
     }
-    input += "ffffffff";
+    //input += "ffffffff";
 
     //turning data into bytes
     std::basic_string<uint8_t> bytes;
