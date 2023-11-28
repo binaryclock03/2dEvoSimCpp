@@ -15,7 +15,7 @@ int main()
     ProgressTracker Pt = ProgressTracker(mutationRate, populationSize, true);
     
     Population* pop = new Population();
-    pop->generateGenomes(populationSize, 8, funcs.sensorFuncs.size(), funcs.actionFuncs.size(), 2);
+    pop->generateGenomes(populationSize, 16, funcs.sensorFuncs.size(), funcs.actionFuncs.size(), 4);
     pop->saveGeneration();
 
     
@@ -40,7 +40,8 @@ int main()
 
         grade = static_cast<float>(numberOfSurvivors) / static_cast<float>(Pt.targetSurvivors);
 
-        mutationRate = (1.038 - 3.3793*grade + 3.8078*pow(grade,2) - 1.4546*pow(grade,3))*8/10 ;
+        //mutationRate = (1.038 - 3.3793*grade + 3.8078*pow(grade,2) - 1.4546*pow(grade,3))*8/10 ;
+        mutationRate = 0.01;
         cout << to_string(mutationRate) << endl;
 
         pop->nextGeneration(mutationRate,sim.returnSurvivors());
