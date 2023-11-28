@@ -18,6 +18,7 @@ float ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulatio
     switch(action) {
         case 1:
             this->value = tanh(incoming + incomingLast);
+            this->incoming = 0;
             return 0.;
 
         case 2:
@@ -26,7 +27,7 @@ float ActionNeuron::activate(int action, NeuralNet* brain, Simulation* simulatio
             return this->value;
 
         case 3:
-            if (abs(this->value) > random()) {
+            if (abs(this->value) < random()) {
                 this->actionFunction(this, brain, simulation);
             }
             return 0.;

@@ -14,7 +14,9 @@ float InterNeuron::activate(int action, NeuralNet* brain, Simulation *simulation
     switch(action) {
         case 1:
             this->value = tanh(this->incoming + this->incomingLast);
+            this->incoming = 0;
             return this->value;
+
         case 2:
             this->incomingLast = this->incomingNext;
             this->incomingNext = 0;
