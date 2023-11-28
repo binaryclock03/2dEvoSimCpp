@@ -48,3 +48,6 @@ Simulator/.vs
 /.vs/slnx.sqlite
 /Debug
 /x64
+*.cpython-39.pyc
+Populations/*.bin
+Playbacks/*.bin
