@@ -26,23 +26,22 @@ void Simulation::simulate()
 void Simulation::simulate(int steps, int generation)
 {
     this->maxTick = steps;
-    for (short i = 0; i < steps; i++)
+    for (short i = 0; i < maxTick; i++)
     {
-        if (generation%250 == 0)
+        if (generation%50 == 0)
         {
             this->saveState(generation);
         }
-        if (i == 127)
+        if (i == (int)(maxTick/2))
         {
-            for (int i = 0; i < this->creatures.size(); i++)
+            for (int j = 0; j < this->creatures.size(); j++)
             {
-                int x = this->getCreatureX(i);
-                int y = this->getCreatureY(i);
+                int x = this->getCreatureX(j);
+                int y = this->getCreatureY(j);
 
-                if (x > ((int)this->gridBounds[0] / 2))
+                if (x < ((int)this->gridBounds[0] / 2))
                 {
-                    //this->creatures.erase(creatures.begin() + i);
-                    //this->setCreaturePos(i, 50000);
+                    this->eraseCreature(j);
                 }
             }
         }
@@ -101,9 +100,11 @@ vector<int> Simulation::returnSurvivors()
     {
         int x = this->getCreatureX(i);
         int y = this->getCreatureY(i);
-
-        if ((y < ((int) this->gridBounds[0]/4)) && (x < ((int)this->gridBounds[1] / 4)))
-            survivors.push_back(i);
+        
+        if (!(IdPos[i] == -1)) {
+            if ((y < ((int)this->gridBounds[0] / 4)) && (x < ((int)this->gridBounds[1] / 4)))
+                survivors.push_back(i);
+        }
     }
     return survivors;
 }
@@ -125,27 +126,38 @@ int Simulation::getCreatureY(int id)
 
 void Simulation::setCreaturePos(int id, int pos)
 {
-    if (this->PosId.count(pos) == 0)
-    {
-        int beforePos = this->IdPos[id];
-        this->PosId.erase(beforePos);
-        this->PosId.insert({ pos, id });
-        this->IdPos[id] = pos;
+    if (!(IdPos[id] == -1)) {
+        if (this->PosId.count(pos) == 0)
+        {
+            int beforePos = this->IdPos[id];
+            this->PosId.erase(beforePos);
+            this->PosId.insert({ pos, id });
+            this->IdPos[id] = pos;
+        }
     }
+}
+
+void Simulation::eraseCreature(int id)
+{
+    int beforePos = this->IdPos[id];
+    this->PosId.erase(beforePos);
+    this->IdPos[id] = -1;
 }
 
 void Simulation::moveCreature(int id, int x, int y)
 {
-    int pos = this->getCreaturePos(id);
-    int posX = this->getCreatureX(id);
-    int posY = this->getCreatureY(id);
+    if (!(IdPos[id] == -1)) {
+        int pos = this->getCreaturePos(id);
+        int posX = this->getCreatureX(id);
+        int posY = this->getCreatureY(id);
 
-    if (x != 0 && ((posX != 0 && posX != this->gridBounds[0]) || (posX == this->gridBounds[0] && x < 0) || (posX == 0 && x > 0))) {
-        pos += x;
-    }
+        if (x != 0 && ((posX != 0 && posX != this->gridBounds[0]) || (posX == this->gridBounds[0] && x < 0) || (posX == 0 && x > 0))) {
+            pos += x;
+        }
 
-    if (y != 0 && ((posY != 0 && posY != this->gridBounds[1]) || (posY == this->gridBounds[1] && y < 0) || (posY == 0 && y > 0))) {
-        pos += y * this->gridBounds[0];
+        if (y != 0 && ((posY != 0 && posY != this->gridBounds[1]) || (posY == this->gridBounds[1] && y < 0) || (posY == 0 && y > 0))) {
+            pos += y * this->gridBounds[0];
+        }
+        this->setCreaturePos(id, pos);
     }
-    this->setCreaturePos(id, pos);
 }

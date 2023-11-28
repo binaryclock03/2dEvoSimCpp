@@ -30,6 +30,7 @@ public:
 
     void moveCreature(int id, int x, int y);
     void setCreaturePos(int id, int pos);
+    void eraseCreature(int id);
 
     int getCreaturePos(int id);
     int getCreatureY(int id);
