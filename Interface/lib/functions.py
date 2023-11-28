@@ -111,9 +111,10 @@ neuron_name_dict = {
     4:"pos x",
     5:"pos y",
     6:"age",
-    256:"move x",
-    257:"move y",
-    258:"move rand",
-    269:"move FB",
-    270:"move RL"
+    256:"do_nothing",
+    257:"move x",
+    258:"move y",
+    259:"move rand",
+    260:"move FB",
+    261:"move RL"
 }
