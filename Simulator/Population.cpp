@@ -70,13 +70,9 @@ void Population::saveGeneration() {
         file << generationStr << "\n";
         file.close();
     }
-
-    saveGenerationHex();
-
 }
 
 void Population::saveGenerationHex() {
-    //string input = "0201aa738080d514820453fb80020cbe0583675b818494b406823e758382d60e030257f98304b56505034f2d03058dc601017ec98284dde40402ba3b82053252";
     string filePath = "../Populations/" + this->name + ".bin";
 
     string input = "";
@@ -243,7 +239,7 @@ void Population::nextGeneration(float mutationRate, vector<int> survivors) {
     //this->reproduceSex(mutationRate, survivors);
     this->reproduce(mutationRate);
     if (this->generation % 25) {
-        this->saveGeneration();
+        this->saveGenerationHex();
     }
 
 }

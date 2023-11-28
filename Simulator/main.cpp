@@ -16,7 +16,7 @@ int main()
     
     Population* pop = new Population();
     pop->generateGenomes(populationSize, 16, funcs.sensorFuncs.size(), funcs.actionFuncs.size(), 4);
-    pop->saveGeneration();
+    pop->saveGenerationHex();
 
     
     while(!Pt.targetReached) 
