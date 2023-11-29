@@ -138,7 +138,7 @@ string Genome::toString() {
     for (int i = 0; i < this->numberOfGenes; i++) {
         genomeStr = genomeStr + this->genes[i].toString();
         if (i < this->numberOfGenes - 1 ) {
-            genomeStr = genomeStr + " ";
+            //genomeStr = genomeStr + " ";
         }
     }
     return genomeStr;
