@@ -26,9 +26,15 @@ void Simulation::simulate()
 void Simulation::simulate(int steps, int generation)
 {
     this->maxTick = steps;
+
+    int playback_interval = 50;
+
+    if (generation%playback_interval == 0)
+        this->initializePlayback(generation);
+
     for (short i = 0; i < maxTick; i++)
     {
-        if (generation%50 == 0)
+        if (generation%playback_interval == 0)
         {
             this->saveState(generation);
         }
@@ -63,7 +69,27 @@ void Simulation::saveState(int generation)
     else {
         string stepStr = "";
         for (auto pos:IdPos) {
-            stepStr = stepStr + to_string(pos.second) + ",";
+            stepStr = stepStr + to_string(pos.first) + ":" + to_string(pos.second) + ",";
+        }
+        file << stepStr << "\n";
+        file.close();
+    }
+}
+
+void Simulation::initializePlayback(int generation)
+{
+    string filePath = "../Playbacks/" + this->name + "_" + to_string(generation) + ".csv";
+
+    std::fstream file;
+    file.open(filePath, file.app | file.out);
+
+    if (!file.is_open()) {
+        std::cout << "Failed to open file: " << filePath << std::endl;
+    }
+    else {
+        string stepStr = "";
+        for (auto pos : IdPos) {
+            stepStr = stepStr + to_string(pos.first) + ":" + this->creatures[pos.first].getGenomeString() + ",";
         }
         file << stepStr << "\n";
         file.close();

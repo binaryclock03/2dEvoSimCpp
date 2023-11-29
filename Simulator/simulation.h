@@ -25,6 +25,8 @@ public:
     void simulate(int steps, int generation);
     void saveState(int generation);
 
+    void initializePlayback(int generation);
+
     void optimize();
     void buildFromPop(Population* population);
 
