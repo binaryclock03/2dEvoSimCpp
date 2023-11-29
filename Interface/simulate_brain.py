@@ -118,8 +118,27 @@ def show_brain(brain):
         
         pg.display.update()
 
+def retrive_gene_from_file(filepath):
+    population_n = 1000
+    gene_n = 16
+
+    generations = list()
+
+    with open(filepath, "rb") as f:
+        for genome_i in range(population_n):
+            genomes = list()
+            for i in range(gene_n):
+                genome = f.read(4).hex()
+            if len(genome) == 0:
+                break
+            genomes[i] = genome
+
+        
+
 if __name__ == "__main__" and True:
-    genes_string = "0301a86e 000481d7 00047e66 8000428a 0580ab02 008184c7 0300be10 0081b63f"
+    retrive_gene_from_file("../Populations/UHRZ_p1000g16.bin")
+
+    genes_string = "8203bc24 8283db7a 0202abff 06017943 8180b8c6 8104a84a 010429e0 0505a04b 808176e6 05026c22 8201cf0a 0080e4f7 8080a8c5 0602b8ef 050327e7 84048e37"
     re = g.Genome(16,genes=genes_string.split(" "))
     brain = nt.NeuralNet()
     brain.build_net(re)
