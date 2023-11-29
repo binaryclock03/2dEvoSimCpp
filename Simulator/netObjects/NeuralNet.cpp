@@ -163,6 +163,16 @@ vector<Gene> NeuralNet::getGenes()
     return this->genes;
 }
 
+string NeuralNet::getGenomeString()
+{
+    string genomeString = "";
+    for (Gene gene : this->genes) 
+    {
+        genomeString += gene.toString();
+    }
+    return genomeString;
+}
+
 void NeuralNet::setDirection(int dir)
 {
     this->direction = clamp(dir, 1, 8);

@@ -41,6 +41,8 @@ public:
 
     vector<Gene> getGenes();
 
+    string getGenomeString();
+
     void setDirection(int dir);
     void setDirection(int x, int y);
     int getDirection();
