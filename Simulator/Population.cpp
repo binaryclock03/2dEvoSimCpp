@@ -79,11 +79,8 @@ void Population::saveGenerationHex() {
     string input = "";
     for (int i = 0; i < this->numberOfGenomes; i++) {
         input = input + this->genomes[i].toString();
-        if (i < this->numberOfGenomes - 1) {
-            //input += "ffffffff";
-        }
     }
-    //input += "ffffffff";
+   
 
     //turning data into bytes
     std::basic_string<uint8_t> bytes;
