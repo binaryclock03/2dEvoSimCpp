@@ -128,7 +128,10 @@ vector<int> Simulation::returnSurvivors()
         int y = this->getCreatureY(i);
         
         if (!(IdPos[i] == -1)) {
-            if ((y < ((int)this->gridBounds[0] / 4)) && (x < ((int)this->gridBounds[1] / 4)))
+            if ((y > 7 * ((int)this->gridBounds[0] / 8)) && (x > 7 * ((int)this->gridBounds[1] / 8))||
+                (y < ((int)this->gridBounds[0] / 8)) && (x < ((int)this->gridBounds[1] / 8)) ||
+                (y > 7 * ((int)this->gridBounds[0] / 8)) && (x < ((int)this->gridBounds[1] / 8)) ||
+                (y < ((int)this->gridBounds[0] / 8)) && (x > 7 * ((int)this->gridBounds[1] / 8)))
                 survivors.push_back(i);
         }
     }
@@ -147,7 +150,7 @@ int Simulation::getCreatureX(int id)
 
 int Simulation::getCreatureY(int id)
 {
-    return (int) this->getCreaturePos(id) / this->gridBounds[1];
+    return (int) (this->getCreaturePos(id) / this->gridBounds[0]);
 }
 
 void Simulation::setCreaturePos(int id, int pos)
@@ -177,11 +180,11 @@ void Simulation::moveCreature(int id, int x, int y)
         int posX = this->getCreatureX(id);
         int posY = this->getCreatureY(id);
 
-        if (x != 0 && ((posX != 0 && posX != this->gridBounds[0]) || (posX == this->gridBounds[0] && x < 0) || (posX == 0 && x > 0))) {
+        if (!(posX + x >= this->gridBounds[0] || posX + x < 0)) {
             pos += x;
         }
 
-        if (y != 0 && ((posY != 0 && posY != this->gridBounds[1]) || (posY == this->gridBounds[1] && y < 0) || (posY == 0 && y > 0))) {
+        if (!(posY + y >= this->gridBounds[1] || posY + y < 0)) {
             pos += y * this->gridBounds[0];
         }
         this->setCreaturePos(id, pos);
