@@ -118,27 +118,61 @@ def show_brain(brain):
         
         pg.display.update()
 
-def retrive_gene_from_file(filepath):
+def retrive_all_genes_from_file(filepath):
     population_n = 1000
     gene_n = 16
 
     generations = list()
+    gen_number = 0
+    with open(filepath, "rb") as f:
+        while True:
+            genomes = list()
+            for genome_i in range(population_n):
+                genome = str()
+                for i in range(gene_n):
+                    genome += f.read(4).hex()
+                genomes.append(genome)
+            generations.append(genomes)
+
+            # check if end of file
+            check = f.read(1)
+            if (check == b''):
+                break
+            else: f.seek(f.tell()-1)
+
+            gen_number += 1
+
+    print(f"Number of generations: {len(generations)}")
+    print(f"Population: {len(generations[0])}")
+    return generations
+
+def retrive_genome_from_file(filepath:str, generation_number:int, creature_id:int):
+    population_n = 1000
+    gene_n = 16
+    bytes_per_gene = 4
 
     with open(filepath, "rb") as f:
-        for genome_i in range(population_n):
-            genomes = list()
-            for i in range(gene_n):
-                genome = f.read(4).hex()
-            if len(genome) == 0:
-                break
-            genomes[i] = genome
+        bytes_per_genome = bytes_per_gene * gene_n
+        bytes_per_generation = bytes_per_genome * population_n
+        gene_loc = (creature_id * bytes_per_genome) + (generation_number * bytes_per_generation)
+        f.seek(gene_loc)
 
+        return f.read(bytes_per_genome).hex()
         
 
 if __name__ == "__main__" and True:
-    retrive_gene_from_file("../Populations/UHRZ_p1000g16.bin")
+    ## Get genome from file
+    genes_string = retrive_genome_from_file("../Populations/ZJAH_p1000g16.bin", 0, 1)
 
-    genes_string = "8203bc24 8283db7a 0202abff 06017943 8180b8c6 8104a84a 010429e0 0505a04b 808176e6 05026c22 8201cf0a 0080e4f7 8080a8c5 0602b8ef 050327e7 84048e37"
+    ## Add spaces so the visualizer can work
+    result = ""
+    for i in range(0, len(genes_string), 8):
+        result += genes_string[i:i+8] + " "
+    result = result.strip()
+    genes_string = result
+
+    ## Visualize the genome
+    #genes_string = "8203bc24 8283db7a 0202abff 06017943 8180b8c6 8104a84a 010429e0 0505a04b 808176e6 05026c22 8201cf0a 0080e4f7 8080a8c5 0602b8ef 050327e7 84048e37"
     re = g.Genome(16,genes=genes_string.split(" "))
     brain = nt.NeuralNet()
     brain.build_net(re)
