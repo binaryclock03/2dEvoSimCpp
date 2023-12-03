@@ -1,18 +1,18 @@
 import time
 import pygame as pg
 import os
+import simulate_brain as sb
 
-def play():
-    path_to = os.path.join(os.path.dirname(__file__), "Playback")
-    files = os.listdir(path_to)
-    with open(os.path.join(path_to, files[0])) as f:
+def play(filepath, gen_number):
+
+    with open(filepath) as f:
         reader = f.readline()
 
         gridsize = (128,128) 
         reader = f.readline()
 
         pg.init()
-        display = pg.display.set_mode((128*6+32,128*6+32))
+        display = pg.display.set_mode((128*6+32+800,128*6+32))
         pg.display.set_caption("Creatures Playback Display")
 
         time1 = time.time()
@@ -21,6 +21,8 @@ def play():
         paused = True
         selected_id = -1
         pos_id = {}
+        brain_display = pg.Surface((800,800))
+        brain_display.fill((255,255,255))
 
         creature_size = 6
         sim_ue = 16 - (creature_size/2)
@@ -41,6 +43,11 @@ def play():
                     keydown = pg.key.get_pressed()
                     if keydown[pg.K_SPACE]:
                         paused = not paused
+                    
+                    if keydown[pg.K_0]:
+                        ## Get genome from file
+                        pass
+                        
                 
                 if event.type == pg.MOUSEBUTTONDOWN:
                     if pg.mouse.get_pressed()[0]:
@@ -49,6 +56,9 @@ def play():
 
                         pos = pos_v[0] + pos_v[1]*128
                         selected_id = pos_id.get(pos)
+
+                        if selected_id != None:
+                            brain_display = sb.show_brain_from_id("../Populations/QELL_p1000g16.bin", gen_number, selected_id)
 
 
             display.fill((255,255,255))
@@ -80,9 +90,17 @@ def play():
                     #pg.draw.rect(display, (0,0,0), pg.Rect(sim_ue + x*6, sim_ue + y*6, 6, 6))
                     pg.draw.circle(display, color, (x*6+16,y*6+16), 3)
             
+            display.blit(brain_display, (800,0))
+
             time2 = time.time()
 
             pg.display.update()
 
 if __name__ == "__main__" and True:
-    play()
+
+    filename = "ZBBM_p1000g16"
+    gen_number = 1000
+
+    filepath = "../Playbacks/" + filename + "_" + str(gen_number) + ".csv"
+
+    play(filepath, gen_number)

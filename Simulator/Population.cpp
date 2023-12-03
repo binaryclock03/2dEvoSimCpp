@@ -236,8 +236,9 @@ void Population::nextGeneration(float mutationRate, vector<int> survivors) {
     this->genomes = newGenomes;
     //this->reproduceSex(mutationRate, survivors);
     this->reproduce(mutationRate);
-    if (this->generation % 25) {
+    //if (this->generation % 25) {
         this->saveGenerationHex();
-    }
+        //this->saveGeneration();
+    //}
 
 }
